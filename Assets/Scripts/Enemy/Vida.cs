@@ -5,11 +5,7 @@ using UnityEngine;
 public class Vida : MonoBehaviour
 {
     private float Hp = 10;
-    void Start()
-    {
-        
-    }
-
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
@@ -28,8 +24,4 @@ public class Vida : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        
-    }
 }
