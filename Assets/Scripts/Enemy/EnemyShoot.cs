@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class EnemyShoot : MonoBehaviour
 {
+    [Header("Referencias")]
     [SerializeField] private GameObject Bulletprefab;
     [SerializeField] private Transform SpawnShootPosition;
     [SerializeField] private GameObject Player;
+
+    [Header("Stats")]
     [SerializeField] private float BulletForce = 5f;
+
     void Start()
     {
         Player = GameObject.FindWithTag("Player");

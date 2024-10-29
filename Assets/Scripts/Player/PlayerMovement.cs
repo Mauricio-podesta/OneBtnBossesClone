@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (Input.GetMouseButtonDown(0))
         {
             movingForward = !movingForward;
         }

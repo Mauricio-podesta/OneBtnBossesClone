@@ -7,10 +7,9 @@ public class BulletMovement : MonoBehaviour
 {
     [SerializeField] float BulletSpeed = 50f;
     [SerializeField] GameObject Enemytarget;
-    Rigidbody2D Rb;
+    
     void Start()
     {
-        Rb = GetComponent<Rigidbody2D>();
         Enemytarget = GameObject.FindWithTag("Enemy");
     }
 
