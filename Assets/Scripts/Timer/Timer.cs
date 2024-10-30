@@ -1,18 +1,19 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Timer : MonoBehaviour
 {
     private float gameTime = 0f;
-    [SerializeField] private TextMeshProUGUI timerText;
+   public TextMeshProUGUI timerText;
     private bool isPlayerAlive = true;
 
-    [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerHelath playerHealth;
 
     void Start()
     {
-        playerHealth = FindObjectOfType<PlayerHealth>();
+        playerHealth = FindObjectOfType<PlayerHelath>();
         if (playerHealth != null)
         {
             playerHealth.OnPlayerDeath += HandlePlayerDeath;
