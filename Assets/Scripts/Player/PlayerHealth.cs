@@ -1,99 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] Transform[] PathPoints;
-    [SerializeField] float movementSpeed = 5f;
-    [SerializeField] float radio = 5f;
-    [SerializeField] float distancebetweenpoint = 1f;
-    private int PathPointsIndex = 0;
-    private bool movingForward = true;
-    private LineRenderer lineRenderer;
+    private float Hp = 3;
+    public event Action OnPlayerDeath;
 
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        DistribuirObjetosCircularmente();
-        if (PathPoints.Length > 0)
+        if (collision.gameObject.CompareTag("EnemyBullet"))
         {
-            transform.position = PathPoints[PathPointsIndex].position;
-        }
-        DibujarLinea();
-    }
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            movingForward = !movingForward;
-        }
-        Movement();
-    }
+            TakeDamage();
 
-    void DistribuirObjetosCircularmente()
-    {
-        int cantidad = Mathf.FloorToInt(2 * Mathf.PI * radio / distancebetweenpoint);
-        PathPoints = new Transform[cantidad]; 
-
-        for (int i = 0; i < cantidad; i++)
-        {
-            float angulo = i * Mathf.PI * 2 / cantidad;
-
-            
-            float x = Mathf.Cos(angulo) * radio;
-            float y = Mathf.Sin(angulo) * radio;
-
-            
-            Vector3 posicion = new Vector3(x, y, 0) + transform.position;
-
-           
-            GameObject punto = new GameObject($"Point {i}");
-            punto.transform.position = posicion;
-            PathPoints[i] = punto.transform; 
         }
     }
-
-    void DibujarLinea()
+    public void TakeDamage()
     {
-        if (lineRenderer == null || PathPoints.Length == 0) return;
-
-        lineRenderer.positionCount = PathPoints.Length; 
-        for (int i = 0; i < PathPoints.Length; i++)
+        Hp -= 1;
+        if (Hp <= 0)
         {
-            lineRenderer.SetPosition(i, PathPoints[i].position); 
+            OnDeath();
         }
+        Debug.Log("Health: " + Hp);
+        Destroy(gameObject);
     }
 
 
-
-    void Movement()
+    private void OnDeath()
     {
-        if (PathPoints.Length == 0) return;
-
-
-        transform.position = Vector3.MoveTowards(transform.position, PathPoints[PathPointsIndex].position, movementSpeed * Time.deltaTime);
-
-
-        if (Vector3.Distance(transform.position, PathPoints[PathPointsIndex].position) < 0.1f)
+        if (OnPlayerDeath != null)
         {
-            if (movingForward)
-            {
-                PathPointsIndex++;
-                if (PathPointsIndex >= PathPoints.Length)
-                {
-                    PathPointsIndex = 0;
-                }
-            }
-            else
-            {
-                PathPointsIndex--;
-                if (PathPointsIndex < 0)
-                {
-                    PathPointsIndex = PathPoints.Length - 1;
-                }
-            }
+            OnPlayerDeath.Invoke();
         }
+        else
+        {
+            Debug.Log("Null player health");
+        }
+
     }
+
 }
-

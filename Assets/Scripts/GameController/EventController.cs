@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class EventController : MonoBehaviour
 {
-    [SerializeField] private PlayerHelath playerHealth;
+    [SerializeField] private PlayerHealth playerHealth;
     private void OnEnable()
     {
         if (playerHealth != null)
         {
-            playerHealth.OnPlayerDeath += HandleEnemyDeath;
+            playerHealth.OnPlayerDeath += HandlePlayerDeath;
         }
         else
         {
@@ -21,7 +21,7 @@ public class EventController : MonoBehaviour
     {
         if (playerHealth != null)
         {
-            playerHealth.OnPlayerDeath -= HandleEnemyDeath;
+            playerHealth.OnPlayerDeath -= HandlePlayerDeath;
         }
         else
         {
@@ -29,9 +29,10 @@ public class EventController : MonoBehaviour
         }
     }
 
-    private void HandleEnemyDeath()
+    private void HandlePlayerDeath()
     {
 
-        Debug.Log("Enemy has died!");
+        Debug.Log("Player has died!");
+
     }
 }
