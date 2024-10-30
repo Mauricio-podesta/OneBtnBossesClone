@@ -1,11 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System;
 
 public class PlayerHelath : MonoBehaviour
 {
     private float Hp = 3;
-    public event Action OnEnemyDeath;
+    public event Action OnPlayerDeath;
 
     private void Start()
     {
@@ -33,9 +32,9 @@ public class PlayerHelath : MonoBehaviour
 
     private void OnDeath()
     {
-        if (OnEnemyDeath != null)
+        if (OnPlayerDeath != null)
         {
-            OnEnemyDeath.Invoke();
+            OnPlayerDeath.Invoke();
         }
         else
         {

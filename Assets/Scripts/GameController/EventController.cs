@@ -9,7 +9,7 @@ public class EventController : MonoBehaviour
     {
         if (playerHealth != null)
         {
-            playerHealth.OnEnemyDeath += HandleEnemyDeath;
+            playerHealth.OnPlayerDeath += HandleEnemyDeath;
         }
         else
         {
@@ -21,7 +21,7 @@ public class EventController : MonoBehaviour
     {
         if (playerHealth != null)
         {
-            playerHealth.OnEnemyDeath -= HandleEnemyDeath;
+            playerHealth.OnPlayerDeath -= HandleEnemyDeath;
         }
         else
         {
