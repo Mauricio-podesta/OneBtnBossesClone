@@ -10,7 +10,7 @@ public class EnemyShoot : MonoBehaviour
     [SerializeField] private GameObject Player;
 
     [Header("Stats")]
-    [SerializeField] private float BulletForce = 5f;
+    [SerializeField] private float BulletForce;
 
     void Start()
     {

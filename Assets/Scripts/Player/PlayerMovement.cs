@@ -34,24 +34,23 @@ public class PlayerMovement : MonoBehaviour
     void DistribuirObjetosCircularmente()
     {
         int cantidad = Mathf.FloorToInt(2 * Mathf.PI * radio / distancebetweenpoint);
-        PathPoints = new Transform[cantidad]; // Inicializar el array
+        PathPoints = new Transform[cantidad]; 
 
         for (int i = 0; i < cantidad; i++)
         {
-            // Calcular el ángulo en radianes
             float angulo = i * Mathf.PI * 2 / cantidad;
 
-            // Calcular la posición en el círculo (solo en el plano XY)
+            
             float x = Mathf.Cos(angulo) * radio;
             float y = Mathf.Sin(angulo) * radio;
 
-            // Crear una nueva posición
+            
             Vector3 posicion = new Vector3(x, y, 0) + transform.position;
 
-            // Crear un objeto vacío y asignarlo a PathPoints
+           
             GameObject punto = new GameObject($"Point {i}");
             punto.transform.position = posicion;
-            PathPoints[i] = punto.transform; // Asignar el transform al array
+            PathPoints[i] = punto.transform; 
         }
     }
 
@@ -59,10 +58,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (lineRenderer == null || PathPoints.Length == 0) return;
 
-        lineRenderer.positionCount = PathPoints.Length; // Establecer la cantidad de puntos en la línea
+        lineRenderer.positionCount = PathPoints.Length; 
         for (int i = 0; i < PathPoints.Length; i++)
         {
-            lineRenderer.SetPosition(i, PathPoints[i].position); // Establecer la posición de cada punto
+            lineRenderer.SetPosition(i, PathPoints[i].position); 
         }
     }
 
