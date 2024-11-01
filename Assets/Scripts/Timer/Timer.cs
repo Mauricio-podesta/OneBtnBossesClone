@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI timerText;
     private bool isPlayerAlive = true;
 
+    public VIctoryScene victoryScreen;
 
     void Start()
     {
@@ -40,5 +41,6 @@ public class Timer : MonoBehaviour
     private void HandlePlayerDeath()
     {
         isPlayerAlive = false;
+        victoryScreen.ShowVictoryScreen(gameTime);
     }
 }
