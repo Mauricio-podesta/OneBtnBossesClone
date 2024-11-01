@@ -267,8 +267,8 @@ GameObject:
   - component: {fileID: 254196943}
   - component: {fileID: 254196942}
   - component: {fileID: 254196941}
-  - component: {fileID: 254196940}
   - component: {fileID: 254196944}
+  - component: {fileID: 254196940}
   m_Layer: 5
   m_Name: UI Timer
   m_TagString: Untagged
@@ -1592,6 +1592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1dd75da623f914faa792033e9b6e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hp: 3
 --- !u!58 &1772226654
 CircleCollider2D:
   m_ObjectHideFlags: 0

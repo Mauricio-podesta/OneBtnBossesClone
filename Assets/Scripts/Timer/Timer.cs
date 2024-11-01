@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -9,15 +10,15 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI timerText;
     private bool isPlayerAlive = true;
 
-    public VIctoryScene victoryScreen;
+    
 
     void Start()
     {
+       
         PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
-        if (playerHealth != null)
-        {
-            playerHealth.OnPlayerDeath += HandlePlayerDeath;
-        }
+        
+         playerHealth.OnPlayerDeath += HandlePlayerDeath;
+        
     }
 
     void Update()
@@ -41,6 +42,12 @@ public class Timer : MonoBehaviour
     private void HandlePlayerDeath()
     {
         isPlayerAlive = false;
-        victoryScreen.ShowVictoryScreen(gameTime);
+
+        // Guardar el tiempo de juego en PlayerPrefs antes de cargar la pantalla de victoria
+        PlayerPrefs.SetFloat("GameTime", gameTime);
+        PlayerPrefs.Save();
+
+        // Cargar la escena de victoria
+        SceneManager.LoadScene("VictoryScene");
     }
 }

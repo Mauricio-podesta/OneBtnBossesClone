@@ -1,9 +1,10 @@
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private float Hp = 3;
+    public float Hp = 3;
     public event Action OnPlayerDeath;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,9 +21,11 @@ public class PlayerHealth : MonoBehaviour
         if (Hp <= 0)
         {
             OnDeath();
+            Destroy(gameObject);
         }
         Debug.Log("Health: " + Hp);
-        Destroy(gameObject);
+
+
     }
 
 

@@ -6,44 +6,20 @@ using UnityEngine.UI;
 
 public class VIctoryScene : MonoBehaviour
 {
-    public TextMeshProUGUI totalTimeText;
-    public TextMeshProUGUI bestTimeText;
-    public TextMeshProUGUI newRecordText;
+    public TextMeshProUGUI gameTimeText; // Arrastra el objeto de texto de tiempo en el Inspector
 
-    private float totalTime;
-    private float bestTime;
-
-    void Start()
+    public void ShowVictoryScreen(float gameTime)
     {
-        newRecordText.gameObject.SetActive(false);
+        gameObject.SetActive(true); // Activa la pantalla de victoria
+        DisplayGameTime(gameTime);
     }
 
-    public void ShowVictoryScreen(float time)
+    private void DisplayGameTime(float gameTime)
     {
-        totalTime = time;
-        totalTimeText.text = FormatTime(totalTime);
-        CheckBestTime();
-    }
+        int minutes = Mathf.FloorToInt(gameTime / 60F);
+        int seconds = Mathf.FloorToInt(gameTime % 60);
+        int centiseconds = Mathf.FloorToInt((gameTime * 100) % 100);
 
-    private void CheckBestTime()
-    {
-        bestTime = PlayerPrefs.GetFloat("BestTime", float.MaxValue);
-
-        if (totalTime < bestTime)
-        {
-            bestTime = totalTime;
-            PlayerPrefs.SetFloat("BestTime", bestTime);
-            newRecordText.gameObject.SetActive(true);
-        }
-
-        bestTimeText.text = "Best Time: " + FormatTime(bestTime);
-    }
-
-    private string FormatTime(float time)
-    {
-        int minutes = Mathf.FloorToInt(time / 60F);
-        int seconds = Mathf.FloorToInt(time % 60F);
-        int centiseconds = Mathf.FloorToInt((time * 100F) % 100F);
-        return string.Format("{0:0}:{1:00}:{2:00}", minutes, seconds, centiseconds);
+        gameTimeText.text = string.Format("Tiempo de juego: {0:0}:{1:00}:{2:00}", minutes, seconds, centiseconds);
     }
 }

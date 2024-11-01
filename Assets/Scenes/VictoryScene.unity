@@ -1023,9 +1023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac122d2ebb2a4f74eb8c6b65726f4ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTimeText: {fileID: 1621827774}
-  bestTimeText: {fileID: 667411123}
-  newRecordText: {fileID: 1644229626}
+  gameTimeText: {fileID: 1621827774}
 --- !u!1 &922408222
 GameObject:
   m_ObjectHideFlags: 0
