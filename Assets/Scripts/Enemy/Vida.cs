@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class Vida : MonoBehaviour
 {
     private float Hp = 10;
     [SerializeField] private Slider healthSliderEnemy;
-
+    public event Action OnEnemyDeath;
     private void Start()
     {
         UpdateHealthUI();
@@ -25,6 +26,7 @@ public class Vida : MonoBehaviour
         Hp -= 1;
         if (Hp <= 0)
         {
+            OnDeath();
             Destroy(gameObject);         
         }
         UpdateHealthUI();
@@ -36,6 +38,17 @@ public class Vida : MonoBehaviour
         healthSliderEnemy.value = Hp;
 
     }
+    private void OnDeath()
+    {
+        if (OnEnemyDeath != null)
+        {
+            OnEnemyDeath.Invoke();
+        }
+        else
+        {
+            Debug.Log("Null Enemy health");
+        }
 
+    }
 
 }

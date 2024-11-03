@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,11 +12,13 @@ public class PlayerMovement : MonoBehaviour
     private int PathPointsIndex = 0;
     private bool movingForward = true;
     private LineRenderer lineRenderer;
-
+    string nombreEscena = "GameScene";
     void Start()
     {
+
         lineRenderer = GetComponent<LineRenderer>();
-        DistribuirObjetosCircularmente();
+        if (SceneManager.GetActiveScene().name == nombreEscena)
+        { DistribuirObjetosCircularmente(); }
         if (PathPoints.Length > 0)
         {
             transform.position = PathPoints[PathPointsIndex].position;
