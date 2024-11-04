@@ -22,7 +22,7 @@ public class Timer : MonoBehaviour
             gameBestTime = PlayerPrefs.GetFloat("BestGameTime");
 
         }
-
+        Debug.Log(gameBestTime);
         PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
 
         playerHealth.OnPlayerDeath += HandlePlayerDeath;
@@ -55,9 +55,10 @@ public class Timer : MonoBehaviour
         if (gameBestTime > gameTime || gameBestTime == 0)
         {
             gameBestTime = gameTime;
+            PlayerPrefs.SetFloat("BestGameTime", gameBestTime);
+            PlayerPrefs.Save();
         }
-        else
-            gameBestTime = gameTime;
+       
     }
     void UpdateTimerUI()
     {
@@ -84,8 +85,7 @@ public class Timer : MonoBehaviour
         PlayerPrefs.SetFloat("GameTime", gameTime);
         PlayerPrefs.Save();
 
-        PlayerPrefs.SetFloat("BestGameTime", gameBestTime);
-        PlayerPrefs.Save();
+       
 
         PlayerPrefs.SetString("GameScene", gamescene);
         PlayerPrefs.Save();

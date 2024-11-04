@@ -24,7 +24,7 @@ public class VIctoryScene : MonoBehaviour
             gameBestTime = PlayerPrefs.GetFloat("BestGameTime");
            
         }
-
+        Debug.Log(gameBestTime);
         ShowVictoryScreen(gameTime,gameBestTime);
     }
     public void ShowVictoryScreen(float gameTime,float gameBestTime)
