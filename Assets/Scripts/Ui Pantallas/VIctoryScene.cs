@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class VIctoryScene : MonoBehaviour
 {
-    public TextMeshProUGUI gameTimeText; // Arrastra el objeto de texto de tiempo en el Inspector
+    public TextMeshProUGUI gameTimeText; 
     public TextMeshProUGUI gameBestTimeText;
     public GameObject gameCongratulations;
     float gameTime;

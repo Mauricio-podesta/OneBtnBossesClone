@@ -30,7 +30,7 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if (isPlayerAlive)
+        if (isPlayerAlive || isEnemyAlive)
         {
             gameTime += Time.deltaTime;
             UpdateTimerUI();
@@ -56,7 +56,7 @@ public class Timer : MonoBehaviour
     {
         isPlayerAlive = false;
 
-        // Guardar el tiempo de juego en PlayerPrefs antes de cargar la pantalla de victoria
+        
         PlayerPrefs.SetFloat("GameTime", gameTime);
         PlayerPrefs.Save();
 
@@ -66,7 +66,7 @@ public class Timer : MonoBehaviour
         PlayerPrefs.SetString("GameScene", gamescene); 
         PlayerPrefs.Save();
 
-        // Cargar la escena de Derrota
+        
         SceneManager.LoadScene("LoseScene");
     }
     private void HandleEnemyDeath()
