@@ -28,7 +28,7 @@ public class PlayerShoot : MonoBehaviour
             Shoot();
 
            
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
         }
     }
     void Update()
