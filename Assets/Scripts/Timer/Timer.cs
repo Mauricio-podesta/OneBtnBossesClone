@@ -12,14 +12,20 @@ public class Timer : MonoBehaviour
     private bool isPlayerAlive = true;
     private bool isEnemyAlive = true;
     private string gamescene;
-    
+
 
     void Start()
     {
        
+        if (PlayerPrefs.HasKey("BestGameTime"))
+        {
+            gameBestTime = PlayerPrefs.GetFloat("BestGameTime");
+
+        }
+        Debug.Log(gameBestTime);
         PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
-        
-         playerHealth.OnPlayerDeath += HandlePlayerDeath;
+
+        playerHealth.OnPlayerDeath += HandlePlayerDeath;
 
         Vida enemyHealt = FindObjectOfType<Vida>();
 
@@ -34,15 +40,25 @@ public class Timer : MonoBehaviour
         {
             gameTime += Time.deltaTime;
             UpdateTimerUI();
+           
         }
-        UpdateBestTime();
+        if (!isEnemyAlive) 
+        {
+            UpdateBestTime();
+            
+            Debug.Log(gameBestTime);
+        }
+       
     }
     void UpdateBestTime()
     {
-        if (gameBestTime <= gameTime)
+        if (gameBestTime > gameTime || gameBestTime == 0)
         {
             gameBestTime = gameTime;
+            PlayerPrefs.SetFloat("BestGameTime", gameBestTime);
+            PlayerPrefs.Save();
         }
+       
     }
     void UpdateTimerUI()
     {
@@ -56,32 +72,24 @@ public class Timer : MonoBehaviour
     {
         isPlayerAlive = false;
 
-        
-        PlayerPrefs.SetFloat("GameTime", gameTime);
+        PlayerPrefs.SetString("GameScene", gamescene);
         PlayerPrefs.Save();
 
-        PlayerPrefs.SetFloat("BestGameTime", gameBestTime);
-        PlayerPrefs.Save();
 
-        PlayerPrefs.SetString("GameScene", gamescene); 
-        PlayerPrefs.Save();
-
-        
         SceneManager.LoadScene("LoseScene");
     }
     private void HandleEnemyDeath()
     {
         isEnemyAlive = false;
-      
+
         PlayerPrefs.SetFloat("GameTime", gameTime);
         PlayerPrefs.Save();
-        
-        PlayerPrefs.SetFloat("BestGameTime", gameBestTime);
-        PlayerPrefs.Save();
+
+       
 
         PlayerPrefs.SetString("GameScene", gamescene);
         PlayerPrefs.Save();
-       
+
         SceneManager.LoadScene("VictoryScene");
     }
 }
