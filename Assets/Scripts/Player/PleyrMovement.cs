@@ -5,14 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Referencias")]
     [SerializeField] Transform[] PathPoints;
+
+    [Header("Stats")]
     [SerializeField] float movementSpeed = 5f;
     [SerializeField] float radio = 5f;
     [SerializeField] float distancebetweenpoint = 1f;
+
     private int PathPointsIndex = 0;
     private bool movingForward = true;
     private LineRenderer lineRenderer;
+    
+    // Usado solo el nivel 1 para que se genere el circulo
     string nombreEscena = "GameScene";
+    
     void Start()
     {
 
