@@ -5,17 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header ("Path Movement")]
     [SerializeField] Transform[] PathPoints;
-    [SerializeField] float movementSpeed = 5f;
-    [SerializeField] float radio = 5f;
-    [SerializeField] float distancebetweenpoint = 1f;
     private int PathPointsIndex = 0;
-    private bool movingForward = true;
+    [SerializeField] float distancebetweenpoint = 1f;
+    [SerializeField] float radio = 5f;
     private LineRenderer lineRenderer;
+
+    [Header("Movement Stats")]
+    [SerializeField] float movementSpeed = 5f;
+    private bool movingForward = true;
+
     string nombreEscena = "GameScene";
     void Start()
     {
-
         lineRenderer = GetComponent<LineRenderer>();
         if (SceneManager.GetActiveScene().name == nombreEscena)
         { DistribuirObjetosCircularmente(); }
