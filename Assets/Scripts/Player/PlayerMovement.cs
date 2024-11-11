@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     [Header ("Path Movement")]
-    [SerializeField] Transform[] PathPoints;
+    public Transform[] PathPoints;
     private int PathPointsIndex = 0;
     [SerializeField] float distancebetweenpoint = 1f;
     [SerializeField] float radio = 5f;
