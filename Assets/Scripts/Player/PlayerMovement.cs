@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform PathPlayer;
 
     [Header("Stats")]
-    [SerializeField] float movementSpeed = 5f;
+    [SerializeField]public float movementSpeed = 5f;
     [SerializeField] float radio = 5f;
     [SerializeField] float distancebetweenpoint = 1f;
 
@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     private LineRenderer lineRenderer;
 
-    private bool movingForward = true;
+    public bool movingForward = true;
     // Usado solo el nivel 1 para que se genere el circulo
 
     string nombreEscena = "GameScene";
@@ -38,13 +38,17 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        Cambiodireccion();
+        Movement();
+    }
+
+    void Cambiodireccion()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             movingForward = !movingForward;
         }
-        Movement();
     }
-
     void DistribuirObjetosCircularmente()
     {
         int cantidad = Mathf.FloorToInt(2 * Mathf.PI * radio / distancebetweenpoint);
