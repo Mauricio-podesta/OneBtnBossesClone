@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Triangle"))
+        if (collision.gameObject.CompareTag("EnemyBullet"))
         {
             TakeDamage();
         }
