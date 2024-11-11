@@ -34,14 +34,11 @@ public class EnemyAttackTriangle : MonoBehaviour
             int randomIndex = Random.Range(0, playerMovement.PathPoints.Length);
             Transform randomPathPoint = playerMovement.PathPoints[randomIndex];
 
-            // Dirección desde el centro del círculo al punto de la ruta
             Vector3 direction = (randomPathPoint.position - circleCenter.position).normalized;
 
-            // Calcular el ángulo de rotación en el eje Z para que apunte hacia afuera
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180f; // Rotar 180 grados
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180f; 
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
-            // Posicionar el triángulo en el centro del círculo
             Vector3 spawnPosition = circleCenter.position;
 
             GameObject instantiatedObject = Instantiate(triangle, spawnPosition, rotation);

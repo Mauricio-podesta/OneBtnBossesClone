@@ -5,20 +5,17 @@ using UnityEngine.U2D;
 
 public class BlinkingTriangle : MonoBehaviour
 {
-    public float blinkDuration = 3f; // Tiempo que el triángulo titila antes de activar la colisión
+    public float blinkDuration = 3f; 
     private Collider2D triangleCollider;
     private SpriteShapeRenderer spriteRenderer;
     private bool isBlinking = true;
 
     void Start()
     {
-        // Obtener el componente Collider2D y desactivarlo inicialmente
         triangleCollider = GetComponent<Collider2D>();
         
-        triangleCollider.enabled = false; // Desactivar colisión inicialmente
+        triangleCollider.enabled = false; 
 
-
-        // Obtener el SpriteRenderer para controlar el titileo
         spriteRenderer = GetComponentInChildren<SpriteShapeRenderer>();
 
         StartCoroutine(Blink());
@@ -33,16 +30,22 @@ public class BlinkingTriangle : MonoBehaviour
         {
             spriteRenderer.color = new Color(255, 155, 155, visible ? 255f : 0.5f);
             visible = !visible;
-            yield return new WaitForSeconds(0.2f); // Intervalo de titileo
+            yield return new WaitForSeconds(0.2f);
             elapsed += 0.2f;
         }
         
-       
-
         spriteRenderer.color = new Color(255, 155, 155, 255); 
         isBlinking = false;
 
         triangleCollider.enabled = true;
     }
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if(!isBlinking && collision.CompareTag("Player")) 
+    //    {
+    //        Debug.Log("Daño a player");
+    //    }
+    //}
 
 }
