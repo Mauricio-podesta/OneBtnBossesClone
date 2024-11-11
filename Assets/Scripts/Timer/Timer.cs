@@ -23,6 +23,7 @@ public class Timer : MonoBehaviour
 
         }
         Debug.Log(gameBestTime);
+        
         PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
 
         playerHealth.OnPlayerDeath += HandlePlayerDeath;

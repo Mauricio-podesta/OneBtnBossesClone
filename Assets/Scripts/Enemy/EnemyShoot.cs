@@ -5,32 +5,106 @@ using UnityEngine;
 public class EnemyShoot : MonoBehaviour
 {
     [Header("Referencias")]
-    [SerializeField] private GameObject Bulletprefab;
-    [SerializeField] private Transform SpawnShootPosition;
-    [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject Bulletprefab;         
+    [SerializeField] private Transform SpawnShootPosition;    
+    [SerializeField] private LineRenderer lineRenderer;       
 
     [Header("Stats")]
-    [SerializeField] private float BulletForce;
+    [SerializeField] private float BulletForce;               
+    [SerializeField] private int numberOfPoints = 50;         
+    
 
-    void Start()
+    private void Start()
     {
-        Player = GameObject.FindWithTag("Player");
+        
+        if (lineRenderer == null)
+        {
+            lineRenderer = GetComponent<LineRenderer>();
+        }
+
+        
+        StartCoroutine(Ishoot());
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
+        
+    }
+
+   
+    IEnumerator Ishoot()
+    {
+        yield return new WaitForSeconds(2f); 
+
+        while (true)
         {
-            Shoot();
+            float randomAngle = Random.Range(-180f, 180f);
+            float angleRad = randomAngle * Mathf.Deg2Rad;
+
+            ShowTrajectory(angleRad);
+
+          
+            yield return new WaitForSeconds(1f);
+
+           
+            Shoot(angleRad);
+
+          
+            HideTrajectory();
+
+          
+            yield return new WaitForSeconds(0.5f);
         }
     }
-    void Shoot()
+
+   
+    void Shoot(float angleRad)
     {
         GameObject newBullet = Instantiate(Bulletprefab, SpawnShootPosition.position, Quaternion.identity);
         Rigidbody2D newBulletRb = newBullet.GetComponent<Rigidbody2D>();
-        Vector2 shootDirection = (Player.transform.position - transform.position).normalized;
+
+     
+      
+        
+        Vector2 shootDirection = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
+
+      
         newBulletRb.AddForce(shootDirection * BulletForce, ForceMode2D.Impulse);
-        Destroy(newBullet, 2f); 
+
+       
+        Destroy(newBullet, 2f);
+    }
+
+   
+    void ShowTrajectory(float angleRad)
+    {
+        Vector3[] trajectoryPoints = new Vector3[numberOfPoints];
+
+        // velocidad inicial del proyectil
+       
+        Vector2 initialVelocity = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * BulletForce;
+
+       
+        for (int i = 0; i < numberOfPoints; i++)
+        {
+            float time = i * 0.1f; // El tiempo entre cada punto
+
+           
+            float x = initialVelocity.x * time;
+            float y = initialVelocity.y * time;
+
+            // Asignamos la posición de cada punto de la trayectoria
+            trajectoryPoints[i] = SpawnShootPosition.position + new Vector3(x, y, 0f);
+        }
+
+        // Actualizamos la posición de la trayectoria en el LineRenderer
+        lineRenderer.positionCount = trajectoryPoints.Length;
+        lineRenderer.SetPositions(trajectoryPoints);
+    }
+
+    // Método para ocultar la trayectoria de la bala
+    void HideTrajectory()
+    {
+        lineRenderer.positionCount = 0; // Ocultamos la trayectoria desactivando el LineRenderer
     }
 }
