@@ -5,10 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    
-
     [Header("Referencias")]
-    [SerializeField] Transform[] PathPoints;
+    public Transform[] PathPoints;
     [SerializeField] Transform PathPlayer;
 
     [Header("Stats")]
@@ -18,18 +16,18 @@ public class PlayerMovement : MonoBehaviour
 
 
     private int PathPointsIndex = 0;
-  
+
     private LineRenderer lineRenderer;
 
     private bool movingForward = true;
     // Usado solo el nivel 1 para que se genere el circulo
 
     string nombreEscena = "GameScene";
-    
+
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        
+
         if (SceneManager.GetActiveScene().name == nombreEscena)
         { DistribuirObjetosCircularmente(); }
         if (PathPoints.Length > 0)
@@ -50,29 +48,29 @@ public class PlayerMovement : MonoBehaviour
     void DistribuirObjetosCircularmente()
     {
         int cantidad = Mathf.FloorToInt(2 * Mathf.PI * radio / distancebetweenpoint);
-        PathPoints = new Transform[cantidad]; 
+        PathPoints = new Transform[cantidad];
 
         for (int i = 0; i < cantidad; i++)
         {
             float angulo = i * Mathf.PI * 2 / cantidad;
 
-            
+
             float x = Mathf.Cos(angulo) * radio;
             float y = Mathf.Sin(angulo) * radio;
 
-            
+
             Vector3 posicion = new Vector3(x, y, 0) + transform.position;
 
-           
+
             GameObject punto = new GameObject($"Point {i}");
-            
+
             if (PathPlayer != null)
             {
                 punto.transform.SetParent(PathPlayer);
             }
 
             punto.transform.position = posicion;
-            PathPoints[i] = punto.transform; 
+            PathPoints[i] = punto.transform;
         }
     }
 
@@ -80,10 +78,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (lineRenderer == null || PathPoints.Length == 0) return;
 
-        lineRenderer.positionCount = PathPoints.Length; 
+        lineRenderer.positionCount = PathPoints.Length;
         for (int i = 0; i < PathPoints.Length; i++)
         {
-            lineRenderer.SetPosition(i, PathPoints[i].position); 
+            lineRenderer.SetPosition(i, PathPoints[i].position);
         }
     }
 
