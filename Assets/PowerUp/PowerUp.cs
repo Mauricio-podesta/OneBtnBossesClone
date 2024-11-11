@@ -1,42 +1,85 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
+using UnityEngine.UI;
+using System;
 
 public class PowerUp : MonoBehaviour
 {
-    public PlayerMovement playerMovement;
-    float charge  = 0;
-    private bool previousDirection;
+    [Header("Stats")]
+    [SerializeField] float charge = 0;
     [SerializeField] private float velocidadIncremento = 2f;
+    [SerializeField] private float MaxVelocity = 15f;
+
+    [Header("Referencias")]
+    [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] private Slider Powerupslide;
+
+    //datos privados
+    public static bool canactivate = false;
+    float normalvelocity;
+    private Collider2D playerCollider;
 
     void Start()
     {
-        if (playerMovement != null)
+        UpdateHealthUI();
+
+        normalvelocity = playerMovement.movementSpeed;
+
+        playerCollider = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
+       
+        if (playerCollider == null)
         {
-            previousDirection = playerMovement.movingForward;
+            Debug.LogWarning("No se encontró el Collider2D en el objeto con el tag 'Player'");
         }
+        
+     
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
-        charger();
-        if (charge == 100 && previousDirection != playerMovement.movingForward)
+        if (charge >= 100 && Input.GetMouseButtonDown(0))
         {
-
+            canactivate = true;
+        }
+        if (canactivate)
+        {
+            Discharge();
             playerMovement.movementSpeed += velocidadIncremento;
-            previousDirection = playerMovement.movingForward;
+            playerMovement.movementSpeed = Mathf.Clamp(playerMovement.movementSpeed, 0f, MaxVelocity);
+        }
+        else
+        {
+            charger();
 
         }
-
     }
 
+    void Discharge()
+    {
+        charge -= 16.67f * Time.deltaTime;
+        
+        charge = Mathf.Clamp(charge, 0f, 100f);
+        UpdateHealthUI();
+        if (charge <= 0) 
+        {
+            canactivate &= false;
+        }
+        playerCollider.enabled = false;
+    }
     void charger()
     {
-        charge += 2 * Time.deltaTime;
-        charge = Mathf.Clamp(charge, 0f, 100);
-    }
 
+        charge += 8.33f * Time.deltaTime;
+        //maximo de la carga
+        charge = Mathf.Clamp(charge, 0f, 100f);
+        UpdateHealthUI();
+        playerMovement.movementSpeed = normalvelocity;
+        playerCollider.enabled = true;
+    }
+    void UpdateHealthUI()
+    {
+        Powerupslide.value = charge;
+
+    }
 }

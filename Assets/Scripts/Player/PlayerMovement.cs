@@ -20,8 +20,8 @@ public class PlayerMovement : MonoBehaviour
     private LineRenderer lineRenderer;
 
     public bool movingForward = true;
+   
     // Usado solo el nivel 1 para que se genere el circulo
-
     string nombreEscena = "GameScene";
 
     void Start()
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Cambiodireccion()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!PowerUp.canactivate && Input.GetMouseButtonDown(0))
         {
             movingForward = !movingForward;
         }
