@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 28832043}
   - component: {fileID: 28832042}
   m_Layer: 5
-  m_Name: EnemyLife
+  m_Name: EnemyLife canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
