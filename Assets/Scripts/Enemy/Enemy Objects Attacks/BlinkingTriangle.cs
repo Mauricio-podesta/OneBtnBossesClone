@@ -31,13 +31,15 @@ public class BlinkingTriangle : MonoBehaviour
         bool visible = true;
         while (elapsed < blinkDuration && isBlinking)
         {
-            spriteRenderer.color = new Color(1, 1, 1, visible ? 1f : 0.5f);
-            visible = !visible; 
+            spriteRenderer.color = new Color(255, 155, 155, visible ? 255f : 0.5f);
+            visible = !visible;
+            yield return new WaitForSeconds(0.2f); // Intervalo de titileo
+            elapsed += 0.2f;
         }
-        yield return new WaitForSeconds(0.2f); // Intervalo de titileo
-        elapsed += 0.2f;
+        
+       
 
-        spriteRenderer.color = new Color(1, 1, 1, 1); 
+        spriteRenderer.color = new Color(255, 155, 155, 255); 
         isBlinking = false;
 
         triangleCollider.enabled = true;

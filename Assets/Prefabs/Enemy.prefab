@@ -97,7 +97,6 @@ GameObject:
   - component: {fileID: 2896467386090775030}
   - component: {fileID: 868008679088896494}
   - component: {fileID: 8183960355619784481}
-  - component: {fileID: 4303335971158748158}
   - component: {fileID: 6417204524830151681}
   m_Layer: 0
   m_Name: Enemy
@@ -266,41 +265,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSliderEnemy: {fileID: 0}
---- !u!58 &4303335971158748158
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2007157778596653760}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.50000006
 --- !u!114 &6417204524830151681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,16 +272,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007157778596653760}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e784530b43c370141b01ae95ab6c3582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triangle: {fileID: 1939384616687109941, guid: ab220ccf5b12b634a974581de7bedf59, type: 3}
+  triangle: {fileID: 8703614519422574261, guid: 8d964de1e733abc4fb7018202453bbb3, type: 3}
   repeatTime: 4
   startDelay: 2
   circleCenter: {fileID: 0}
-  offsetDistance: 0
+  offsetDistance: 1
 --- !u!1 &2156918987572538880
 GameObject:
   m_ObjectHideFlags: 0
