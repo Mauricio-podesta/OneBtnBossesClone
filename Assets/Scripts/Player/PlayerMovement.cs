@@ -6,20 +6,20 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     [Header ("Path Movement")]
-    public Transform[] PathPoints;
+    [SerializeField] Transform[] PathPoints;
     private int PathPointsIndex = 0;
-    [SerializeField] float distancebetweenpoint = 1f;
-    [SerializeField] float radio = 5f;
+  
     private LineRenderer lineRenderer;
 
-    [Header("Movement Stats")]
-    [SerializeField] float movementSpeed = 5f;
     private bool movingForward = true;
+    // Usado solo el nivel 1 para que se genere el circulo
 
     string nombreEscena = "GameScene";
+    
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        
         if (SceneManager.GetActiveScene().name == nombreEscena)
         { DistribuirObjetosCircularmente(); }
         if (PathPoints.Length > 0)
@@ -55,6 +55,12 @@ public class PlayerMovement : MonoBehaviour
 
            
             GameObject punto = new GameObject($"Point {i}");
+            
+            if (PathPlayer != null)
+            {
+                punto.transform.SetParent(PathPlayer);
+            }
+
             punto.transform.position = posicion;
             PathPoints[i] = punto.transform; 
         }
