@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 
-public class BlinkingTriangle : MonoBehaviour
+public class BlinkingObject : MonoBehaviour
 {
     public float blinkDuration = 3f; 
-    private Collider2D triangleCollider;
+    private Collider2D ObjectCollider;
     private SpriteShapeRenderer spriteRenderer;
     private bool isBlinking = true;
 
     void Start()
     {
-        triangleCollider = GetComponent<Collider2D>();
+        ObjectCollider = GetComponent<Collider2D>();
         
-        triangleCollider.enabled = false; 
+        ObjectCollider.enabled = false; 
 
         spriteRenderer = GetComponentInChildren<SpriteShapeRenderer>();
 
@@ -37,15 +37,9 @@ public class BlinkingTriangle : MonoBehaviour
         spriteRenderer.color = new Color(255, 155, 155, 255); 
         isBlinking = false;
 
-        triangleCollider.enabled = true;
+        ObjectCollider.enabled = true;
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if(!isBlinking && collision.CompareTag("Player")) 
-    //    {
-    //        Debug.Log("Daño a player");
-    //    }
-    //}
+   
 
 }
