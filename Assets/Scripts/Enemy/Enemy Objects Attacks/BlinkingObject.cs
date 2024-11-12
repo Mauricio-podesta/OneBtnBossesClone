@@ -10,8 +10,12 @@ public class BlinkingObject : MonoBehaviour
     private SpriteShapeRenderer spriteRenderer;
     private bool isBlinking = true;
 
+    private PlayerHealth playerHealth;
+
     void Start()
     {
+        playerHealth = FindObjectOfType<PlayerHealth>();
+
         ObjectCollider = GetComponent<Collider2D>();
         
         ObjectCollider.enabled = false; 
@@ -40,6 +44,13 @@ public class BlinkingObject : MonoBehaviour
         ObjectCollider.enabled = true;
     }
 
-   
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerHealth.TakeDamage();
+        }
+    }
+
 
 }

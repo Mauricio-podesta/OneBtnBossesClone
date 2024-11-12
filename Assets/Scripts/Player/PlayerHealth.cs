@@ -7,13 +7,7 @@ public class PlayerHealth : MonoBehaviour
     public float Hp = 3;
     public event Action OnPlayerDeath;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("EnemyBullet"))
-        {
-            TakeDamage();
-        }
-    }
+   
     public void TakeDamage()
     {
         Hp -= 1;
