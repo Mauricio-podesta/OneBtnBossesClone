@@ -10,6 +10,8 @@ public class PowerUp : MonoBehaviour
     [SerializeField] float charge = 0;
     [SerializeField] private float velocidadIncremento = 2f;
     [SerializeField] private float MaxVelocity = 15f;
+    [SerializeField] private float Timecharge;
+    [SerializeField] private float TimeDischarge;
 
     [Header("Referencias")]
     [SerializeField] PlayerMovement playerMovement;
@@ -57,7 +59,7 @@ public class PowerUp : MonoBehaviour
 
     void Discharge()
     {
-        charge -= 16.67f * Time.deltaTime;
+        charge -= (100/TimeDischarge) * Time.deltaTime;
         
         charge = Mathf.Clamp(charge, 0f, 100f);
         UpdateHealthUI();
@@ -70,7 +72,7 @@ public class PowerUp : MonoBehaviour
     void charger()
     {
 
-        charge += 8.33f * Time.deltaTime;
+        charge += (100/Timecharge) * Time.deltaTime;
         //maximo de la carga
         charge = Mathf.Clamp(charge, 0f, 100f);
         UpdateHealthUI();

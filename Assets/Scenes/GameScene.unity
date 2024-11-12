@@ -2009,6 +2009,8 @@ MonoBehaviour:
   charge: 0
   velocidadIncremento: 2
   MaxVelocity: 15
+  Timecharge: 8
+  TimeDischarge: 6
   playerMovement: {fileID: 1772226658}
   Powerupslide: {fileID: 1415485408}
 --- !u!4 &1891983319
