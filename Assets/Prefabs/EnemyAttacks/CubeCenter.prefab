@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1082848514500059574}
   - component: {fileID: 2376498032088230063}
-  - component: {fileID: 6371430364055985584}
+  - component: {fileID: 8489104207397421566}
   m_Layer: 0
   m_Name: CubeCenter
   m_TagString: Cubo
@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blinkDuration: 3
---- !u!60 &6371430364055985584
-PolygonCollider2D:
+--- !u!61 &8489104207397421566
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -79,7 +79,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.003543377, y: 0.035431147}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -89,17 +89,9 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.5524254, y: 0.8315759}
-      - {x: -0.7987318, y: 0.54088664}
-      - {x: -0.80011564, y: -0.37650892}
-      - {x: -0.53118175, y: -0.67694366}
-      - {x: 0.6380993, y: -0.6643646}
-      - {x: 0.78560066, y: -0.36055517}
-      - {x: 0.80932426, y: 0.5574331}
-      - {x: 0.54854584, y: 0.81215495}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Size: {x: 1.6731882, y: 1.5810676}
+  m_EdgeRadius: 0.06
 --- !u!1 &6160331691897155765
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,7 +135,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1

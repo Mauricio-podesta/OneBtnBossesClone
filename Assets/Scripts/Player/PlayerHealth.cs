@@ -14,10 +14,10 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage();
         }
-        //if (collision.gameObject.CompareTag("Triangle"))
-        //{
-        //    TakeDamage();
-        //}
+        if (collision.gameObject.CompareTag("Cubo"))
+        {
+            TakeDamage();
+        }
     }
 
    
