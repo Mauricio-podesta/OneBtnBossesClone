@@ -11,6 +11,8 @@ public class EnemyAttackBox : MonoBehaviour
     public float startDelay;
     public float delayBetweenCycles = 1f;
 
+    public float fadeDuration = 1f;
+
     public GameObject parentContainer;
 
     private List<GameObject> instantiatedObjects = new List<GameObject>();
