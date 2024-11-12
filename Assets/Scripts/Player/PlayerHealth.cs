@@ -13,6 +13,10 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage();
         }
+        if (collision.gameObject.CompareTag("Triangle"))
+        {
+            TakeDamage();
+        }
     }
     public void TakeDamage()
     {
