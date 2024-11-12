@@ -33,25 +33,20 @@ public class EnemyAttackBox : MonoBehaviour
     {
         while (true)
         {
-            // Selecciona posiciones aleatorias y almacena los objetos instanciados
             List<Transform> selectedPathPoints = SelectRandomPathPoints();
             InstantiateObjects(selectedPathPoints);
 
-            // Espera el tiempo especificado antes de destruir los objetos
             yield return new WaitForSeconds(repeatTime);
 
-            // Destruye los objetos instanciados
             DestroyInstantiatedObjects();
 
-            // Espera el tiempo adicional entre ciclos antes de instanciar nuevos objetos
             yield return new WaitForSeconds(delayBetweenCycles);
         }
     }
 
-    // Método para seleccionar posiciones aleatorias del array PathPoints
     List<Transform> SelectRandomPathPoints()
     {
-        int count = Random.Range(3, 6); // Número aleatorio entre 3 y 5
+        int count = Random.Range(3, 6); 
         List<Transform> selectedPathPoints = new List<Transform>();
 
         for (int i = 0; i < count; i++)
@@ -68,24 +63,22 @@ public class EnemyAttackBox : MonoBehaviour
         return selectedPathPoints;
     }
 
-    // Método para instanciar objetos en las posiciones seleccionadas
     void InstantiateObjects(List<Transform> pathPoints)
     {
         foreach (Transform pathPoint in pathPoints)
         {
             GameObject instantiatedObject = Instantiate(box, pathPoint.position, Quaternion.identity);
-            instantiatedObject.transform.SetParent(parentContainer.transform); // Asigna el objeto vacío como padre
-            instantiatedObjects.Add(instantiatedObject); // Agrega el objeto instanciado a la lista
+            instantiatedObject.transform.SetParent(parentContainer.transform); 
+            instantiatedObjects.Add(instantiatedObject); 
         }
     }
 
-    // Método para destruir los objetos instanciados
     void DestroyInstantiatedObjects()
     {
         foreach (GameObject obj in instantiatedObjects)
         {
             Destroy(obj);
         }
-        instantiatedObjects.Clear(); // Limpia la lista después de destruir los objetos
+        instantiatedObjects.Clear(); 
     }
 }

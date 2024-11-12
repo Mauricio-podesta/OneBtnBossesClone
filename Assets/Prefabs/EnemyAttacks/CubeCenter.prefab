@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1082848514500059574}
   - component: {fileID: 2376498032088230063}
-  - component: {fileID: 6042807812110033285}
+  - component: {fileID: 6371430364055985584}
   m_Layer: 0
   m_Name: CubeCenter
-  m_TagString: Untagged
+  m_TagString: Cubo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blinkDuration: 3
---- !u!61 &6042807812110033285
-BoxCollider2D:
+--- !u!60 &6371430364055985584
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -79,7 +79,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.008264542, y: 0.044077694}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -89,9 +89,17 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.5785198, y: 1.5509712}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5524254, y: 0.8315759}
+      - {x: -0.7987318, y: 0.54088664}
+      - {x: -0.80011564, y: -0.37650892}
+      - {x: -0.53118175, y: -0.67694366}
+      - {x: 0.6380993, y: -0.6643646}
+      - {x: 0.78560066, y: -0.36055517}
+      - {x: 0.80932426, y: 0.5574331}
+      - {x: 0.54854584, y: 0.81215495}
+  m_UseDelaunayMesh: 0
 --- !u!1 &6160331691897155765
 GameObject:
   m_ObjectHideFlags: 0
