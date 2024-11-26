@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor.EditorTools;
+using UnityEditor;
 
 
 public enum PoolObjectType
@@ -26,12 +27,15 @@ public class PoolInfo
 
 public class ObjectPoolingManager : MonoBehaviour
 {
-    public EnemyAttackTriangle triangleAttack;
 
     [SerializeField] private List<PoolInfo> listOfPools;
     [SerializeField] private Vector3 defaultObjectPosition;
 
+    [SerializeField] private Factory objectFactory;
+
     public static ObjectPoolingManager Instance { get; private set; }
+
+    
 
     private void Awake()
     {
@@ -39,13 +43,15 @@ public class ObjectPoolingManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+
+       
     }
 
     private void Start()
     {
-        for(int i = 0; i < listOfPools.Count; i++)
+        foreach (var poolInfo in listOfPools)
         {
-            FillPool(listOfPools[i]);
+            FillPool(poolInfo);
         }
     }
 
@@ -53,9 +59,9 @@ public class ObjectPoolingManager : MonoBehaviour
     {
         for (int i = 0; i < poolInfo.amount; i++)
         {
-            GameObject objInstance = Instantiate(poolInfo.prefab, poolInfo.container.transform); //utilizar factory
+            GameObject objInstance = objectFactory.CreateObject(poolInfo.type, poolInfo.container.transform); //factory
             objInstance.SetActive(false);
-            //agregar acceso a los otros scripts
+
             objInstance.transform.position = defaultObjectPosition;
             poolInfo.pool.Add(objInstance);
         }
@@ -71,12 +77,12 @@ public class ObjectPoolingManager : MonoBehaviour
         if (pool.Count > 0)
         {
             objInstance = pool[^1];
-            pool.Remove(objInstance);
+            //pool.Remove(objInstance);
+            pool.RemoveAt(pool.Count - 1);
         }
         else
         {
-            objInstance = Instantiate(selected.prefab, selected.container.transform);
-            objInstance.GetComponent<PlayerShoot>().enabled = true;
+            objInstance = objectFactory.CreateObject(type, selected.container.transform); //factory
         }
 
         return objInstance;
@@ -88,21 +94,25 @@ public class ObjectPoolingManager : MonoBehaviour
         obj.transform.position = defaultObjectPosition;
 
         PoolInfo selected = GetPoolByType(type);
-        List<GameObject> pool = selected.pool;
 
-        if (!pool.Contains(obj))
-            pool.Add(obj);
+        if (!selected.pool.Contains(obj))
+            selected.pool.Add(obj);
+        //List<GameObject> pool = selected.pool;
+
+        //if (!pool.Contains(obj))
+        //    pool.Add(obj);
     }
 
     private PoolInfo GetPoolByType(PoolObjectType type)
     {
-        for (int i = 0; i < listOfPools.Count; i++)
-        {
-            if (type == listOfPools[i].type)
-                return listOfPools[i];
-        }
+        //for (int i = 0; i < listOfPools.Count; i++)
+        //{
+        //    if (type == listOfPools[i].type)
+        //        return listOfPools[i];
+        //}
 
-        return null;
+        //return null;
+        return listOfPools.Find(pool => pool.type == type);
     }
 
     private void OnDestroy()
