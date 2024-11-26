@@ -5,16 +5,16 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     [Header("Referencias")]
-    [SerializeField] private GameObject Bulletprefab;
-    [SerializeField] private Transform SpawnShootPosition;
-    [SerializeField] private GameObject Enemy;
+    [SerializeField] private PoolObjectType bulletType;
+    [SerializeField] private Transform spawnShootPosition;
+    [SerializeField] private GameObject enemy;
 
     [Header("Stats")]
-    [SerializeField] private float BulletForce;
+    [SerializeField] private float bulletForce;
 
     void Start()
     {
-        Enemy = GameObject.FindWithTag("Enemy");
+        enemy = GameObject.FindWithTag("Enemy");
         StartCoroutine(Ishoot());
     }
 
@@ -36,11 +36,38 @@ public class PlayerShoot : MonoBehaviour
     }
     void Shoot()
     {
-        GameObject newBullet = Instantiate(Bulletprefab, SpawnShootPosition.position, Quaternion.identity);
-        Rigidbody2D newBulletRb = newBullet.GetComponent<Rigidbody2D>();
-        
-        Vector2 shootDirection = (Enemy.transform.position - transform.position).normalized;
-        newBulletRb.AddForce(shootDirection * BulletForce, ForceMode2D.Impulse);
-        Destroy(newBullet, 2f);
+        // Obtener la bala del Object Pooling Manager
+        GameObject newBullet = ObjectPoolingManager.Instance.GetPooledObject(bulletType);
+
+        // Configurar la posición y activarla
+        if (newBullet != null)
+        {
+            newBullet.transform.position = spawnShootPosition.position;
+            newBullet.transform.rotation = Quaternion.identity;
+            newBullet.SetActive(true);
+
+            Rigidbody2D newBulletRb = newBullet.GetComponent<Rigidbody2D>();
+
+            if (newBulletRb != null)
+            {
+                // Calcular la dirección de disparo hacia el enemigo
+                Vector2 shootDirection = (enemy.transform.position - transform.position).normalized;
+
+                // Aplicar fuerza a la bala
+                newBulletRb.velocity = Vector2.zero; // Reiniciar la velocidad antes de aplicar la nueva fuerza
+                newBulletRb.AddForce(shootDirection * bulletForce, ForceMode2D.Impulse);
+            }
+
+            // Desactivarla tras un tiempo usando una corrutina para devolverla al pool
+            StartCoroutine(ReturnBulletToPool(newBullet, bulletType, 2f));
+        }
+    }
+
+    IEnumerator ReturnBulletToPool(GameObject bullet, PoolObjectType type, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Devuelve el objeto al Object Pool
+        ObjectPoolingManager.Instance.CoolObject(bullet, type);
     }
 }

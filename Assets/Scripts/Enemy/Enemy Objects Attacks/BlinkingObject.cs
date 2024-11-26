@@ -6,30 +6,34 @@ using UnityEngine.U2D;
 public class BlinkingObject : MonoBehaviour
 {
     public float blinkDuration = 3f; 
-    private Collider2D ObjectCollider;
+    private Collider2D objectCollider;
     private SpriteShapeRenderer spriteRenderer;
     private bool isBlinking = true;
 
     private PlayerHealth playerHealth;
 
-    void Start()
+    void Awake()
     {
         playerHealth = FindObjectOfType<PlayerHealth>();
-
-        ObjectCollider = GetComponent<Collider2D>();
-        
-        ObjectCollider.enabled = false; 
-
+        objectCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponentInChildren<SpriteShapeRenderer>();
-
-        StartCoroutine(Blink());
-        
     }
+
+    void OnEnable()
+    {
+        // Reiniciar el estado del objeto cuando se activa desde el pool
+        objectCollider.enabled = false; // El collider empieza desactivado
+        isBlinking = true; // Reiniciar el estado de parpadeo
+        StartCoroutine(Blink());
+    }
+
+
 
     IEnumerator Blink()
     {
         float elapsed = 0f;
         bool visible = true;
+
         while (elapsed < blinkDuration && isBlinking)
         {
             spriteRenderer.color = new Color(255, 155, 155, visible ? 255f : 0.5f);
@@ -41,7 +45,7 @@ public class BlinkingObject : MonoBehaviour
         spriteRenderer.color = new Color(255, 155, 155, 255); 
         isBlinking = false;
 
-        ObjectCollider.enabled = true;
+        objectCollider.enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

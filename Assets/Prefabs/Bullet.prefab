@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletSpeed: 5
-  Enemytarget: {fileID: 0}
+  Enemytarget: {fileID: 2007157778596653760, guid: ee922220ea64648459187132b180777b, type: 3}
+  bulletType: 1
 --- !u!70 &3245489038785339998
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

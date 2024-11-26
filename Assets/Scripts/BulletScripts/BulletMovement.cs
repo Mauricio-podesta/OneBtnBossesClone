@@ -7,7 +7,8 @@ public class BulletMovement : MonoBehaviour
 {
     [SerializeField] float BulletSpeed = 50f;
     [SerializeField] GameObject Enemytarget;
-    
+    [SerializeField] private PoolObjectType bulletType;
+
     void Start()
     {
         Enemytarget = GameObject.FindWithTag("Enemy");
@@ -23,7 +24,7 @@ public class BulletMovement : MonoBehaviour
 
     }
     private void OnCollisionEnter2D(Collision2D collision)
-    {                        
-            Destroy(gameObject);      
+    {
+        ObjectPoolingManager.Instance.CoolObject(gameObject, bulletType);
     }
 }

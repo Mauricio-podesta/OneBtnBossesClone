@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAttackBox : MonoBehaviour
 {
-    [SerializeField] private GameObject box;
+    [SerializeField] private PoolObjectType boxType;
     private PlayerMovement playerMovement;
 
     public float repeatTime;
@@ -13,10 +13,8 @@ public class EnemyAttackBox : MonoBehaviour
 
     public float fadeDuration = 1f;
 
-    public GameObject parentContainer;
 
-    private List<GameObject> instantiatedObjects = new List<GameObject>();
-
+    private List<GameObject> activeObjects = new List<GameObject>();
     void Start()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
@@ -34,11 +32,11 @@ public class EnemyAttackBox : MonoBehaviour
         while (true)
         {
             List<Transform> selectedPathPoints = SelectRandomPathPoints();
-            InstantiateObjects(selectedPathPoints);
+            ActivateObjects(selectedPathPoints);
 
             yield return new WaitForSeconds(repeatTime);
 
-            DestroyInstantiatedObjects();
+            DeactivateObjects();
 
             yield return new WaitForSeconds(delayBetweenCycles);
         }
@@ -63,22 +61,31 @@ public class EnemyAttackBox : MonoBehaviour
         return selectedPathPoints;
     }
 
-    void InstantiateObjects(List<Transform> pathPoints)
+    void ActivateObjects(List<Transform> pathPoints)
     {
         foreach (Transform pathPoint in pathPoints)
         {
-            GameObject instantiatedObject = Instantiate(box, pathPoint.position, Quaternion.identity);
-            instantiatedObject.transform.SetParent(parentContainer.transform); 
-            instantiatedObjects.Add(instantiatedObject); 
+            GameObject pooledObject = ObjectPoolingManager.Instance.GetPooledObject(boxType);
+
+            if (pooledObject != null)
+            {
+                pooledObject.transform.position = pathPoint.position;
+                pooledObject.transform.rotation = Quaternion.identity;
+                pooledObject.SetActive(true);
+
+                activeObjects.Add(pooledObject); // Registrar el objeto activado
+            }
         }
     }
 
-    void DestroyInstantiatedObjects()
+    void DeactivateObjects()
     {
-        foreach (GameObject obj in instantiatedObjects)
+        foreach (GameObject obj in activeObjects)
         {
-            Destroy(obj);
+            obj.SetActive(false); // Desactivar el objeto
+            ObjectPoolingManager.Instance.CoolObject(obj, boxType); // Retornar al pool
         }
-        instantiatedObjects.Clear(); 
+        activeObjects.Clear(); // Limpiar la lista de objetos activos
     }
+    
 }

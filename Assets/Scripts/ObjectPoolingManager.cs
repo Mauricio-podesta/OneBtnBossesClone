@@ -26,6 +26,7 @@ public class PoolInfo
 
 public class ObjectPoolingManager : MonoBehaviour
 {
+    public EnemyAttackTriangle triangleAttack;
 
     [SerializeField] private List<PoolInfo> listOfPools;
     [SerializeField] private Vector3 defaultObjectPosition;
@@ -54,7 +55,6 @@ public class ObjectPoolingManager : MonoBehaviour
         {
             GameObject objInstance = Instantiate(poolInfo.prefab, poolInfo.container.transform); //utilizar factory
             objInstance.SetActive(false);
-            objInstance.GetComponent<PlayerShoot>().enabled = true;
             //agregar acceso a los otros scripts
             objInstance.transform.position = defaultObjectPosition;
             poolInfo.pool.Add(objInstance);

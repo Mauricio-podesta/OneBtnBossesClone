@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAttackTriangle : MonoBehaviour
 {
-    [SerializeField] private GameObject triangle;
+    [SerializeField] private PoolObjectType poolObjectType;
     private PlayerMovement playerMovement;
 
     public float repeatTime;
@@ -22,30 +22,37 @@ public class EnemyAttackTriangle : MonoBehaviour
 
     void StartCoroutineWithDelay()
     {
-        StartCoroutine(RepeatInstantiateAndDestroy());
+        StartCoroutine(RepeatPoolAndReturn());
     }
 
 
 
-    IEnumerator RepeatInstantiateAndDestroy()
+    IEnumerator RepeatPoolAndReturn()
     {
         while (true)
         {
+            // Elegir un punto aleatorio del PathPoints
             int randomIndex = Random.Range(0, playerMovement.PathPoints.Length);
             Transform randomPathPoint = playerMovement.PathPoints[randomIndex];
 
+            // Calcular dirección y rotación
             Vector3 direction = (randomPathPoint.position - circleCenter.position).normalized;
-
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180f; 
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180f;
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
-            Vector3 spawnPosition = circleCenter.position;
+            // Obtener el objeto del pool
+            GameObject pooledObject = ObjectPoolingManager.Instance.GetPooledObject(poolObjectType);
 
-            GameObject instantiatedObject = Instantiate(triangle, spawnPosition, rotation);
+            // Ajustar posición, rotación y activar el objeto
+            pooledObject.transform.position = circleCenter.position;
+            pooledObject.transform.rotation = rotation;
+            pooledObject.SetActive(true);
 
+            // Esperar el tiempo definido antes de desactivar el objeto
             yield return new WaitForSeconds(repeatTime);
 
-            Destroy(instantiatedObject);
+            // Devolver el objeto al pool
+            ObjectPoolingManager.Instance.CoolObject(pooledObject, poolObjectType);
         }
     }
 }

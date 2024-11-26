@@ -5,13 +5,14 @@ using UnityEngine;
 public class EnemyShoot : MonoBehaviour
 {
     [Header("Referencias")]
-    [SerializeField] private GameObject Bulletprefab;
+    [SerializeField] private PoolObjectType bulletType;
     [SerializeField] private Transform SpawnShootPosition;
     [SerializeField] private LineRenderer lineRenderer;
 
     [Header("Stats")]
     [SerializeField] private float BulletForce;
     [SerializeField] private int numberOfPoints = 50;
+
     private void Start()
     {
         if (lineRenderer == null)
@@ -44,13 +45,32 @@ public class EnemyShoot : MonoBehaviour
 
     void Shoot(float angleRad)
     {
-        GameObject newBullet = Instantiate(Bulletprefab, SpawnShootPosition.position, Quaternion.identity);
-        Rigidbody2D newBulletRb = newBullet.GetComponent<Rigidbody2D>();
+        // Obtener una bala del Object Pooling Manager
+        GameObject newBullet = ObjectPoolingManager.Instance.GetPooledObject(bulletType);
 
-        Vector2 shootDirection = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
-        newBulletRb.AddForce(shootDirection * BulletForce, ForceMode2D.Impulse);
+        if (newBullet != null) // Verificar si se obtuvo correctamente del pool
+        {
+            newBullet.transform.position = SpawnShootPosition.position;
+            newBullet.transform.rotation = Quaternion.identity;
+            newBullet.SetActive(true);
 
-        Destroy(newBullet, 2f);
+            Rigidbody2D newBulletRb = newBullet.GetComponent<Rigidbody2D>();
+
+            Vector2 shootDirection = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
+            newBulletRb.velocity = Vector2.zero; // Reiniciar velocidad previa
+            newBulletRb.AddForce(shootDirection * BulletForce, ForceMode2D.Impulse);
+
+            // Desactivar la bala después de 2 segundos en lugar de destruirla
+            StartCoroutine(DisableBulletAfterTime(newBullet, 2f));
+        }
+    }
+
+    IEnumerator DisableBulletAfterTime(GameObject bullet, float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        // Retornar la bala al pool
+        ObjectPoolingManager.Instance.CoolObject(bullet, bulletType);
     }
 
     void ShowTrajectory(float angleRad)
