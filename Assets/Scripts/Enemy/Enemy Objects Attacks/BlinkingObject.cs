@@ -22,8 +22,8 @@ public class BlinkingObject : MonoBehaviour
     void OnEnable()
     {
         // Reiniciar el estado del objeto cuando se activa desde el pool
-        objectCollider.enabled = false; // El collider empieza desactivado
-        isBlinking = true; // Reiniciar el estado de parpadeo
+        objectCollider.enabled = false; 
+        isBlinking = true; 
         StartCoroutine(Blink());
     }
 

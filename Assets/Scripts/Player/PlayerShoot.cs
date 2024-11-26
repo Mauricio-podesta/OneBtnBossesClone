@@ -41,7 +41,7 @@ public class PlayerShoot : MonoBehaviour
         // Obtener la bala del Object Pooling Manager
         GameObject newBullet = ObjectPoolingManager.Instance.GetPooledObject(bulletType);
 
-        // Configurar la posición y activarla
+       
         if (newBullet != null)
         {
             newBullet.transform.position = spawnShootPosition.position;
@@ -52,15 +52,15 @@ public class PlayerShoot : MonoBehaviour
             SoundManager.Instance.PlaySound(shootsound, this.transform.position);
             if (newBulletRb != null)
             {
-                // Calcular la dirección de disparo hacia el enemigo
+               
                 Vector2 shootDirection = (enemy.transform.position - transform.position).normalized;
 
-                // Aplicar fuerza a la bala
-                newBulletRb.velocity = Vector2.zero; // Reiniciar la velocidad antes de aplicar la nueva fuerza
+                
+                newBulletRb.velocity = Vector2.zero;
                 newBulletRb.AddForce(shootDirection * bulletForce, ForceMode2D.Impulse);
             }
 
-            // Desactivarla tras un tiempo usando una corrutina para devolverla al pool
+           
             StartCoroutine(ReturnBulletToPool(newBullet, bulletType, 2f));
         }
     }

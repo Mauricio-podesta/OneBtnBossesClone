@@ -65,6 +65,7 @@ public class EnemyAttackBox : MonoBehaviour
     {
         foreach (Transform pathPoint in pathPoints)
         {
+            // Obtener el objeto del pool
             GameObject pooledObject = ObjectPoolingManager.Instance.GetPooledObject(boxType);
 
             if (pooledObject != null)
@@ -82,10 +83,10 @@ public class EnemyAttackBox : MonoBehaviour
     {
         foreach (GameObject obj in activeObjects)
         {
-            obj.SetActive(false); // Desactivar el objeto
+            obj.SetActive(false);
             ObjectPoolingManager.Instance.CoolObject(obj, boxType); // Retornar al pool
         }
-        activeObjects.Clear(); // Limpiar la lista de objetos activos
+        activeObjects.Clear(); 
     }
     
 }

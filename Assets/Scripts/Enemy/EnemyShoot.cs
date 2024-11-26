@@ -48,7 +48,7 @@ public class EnemyShoot : MonoBehaviour
         // Obtener una bala del Object Pooling Manager
         GameObject newBullet = ObjectPoolingManager.Instance.GetPooledObject(bulletType);
 
-        if (newBullet != null) // Verificar si se obtuvo correctamente del pool
+        if (newBullet != null) 
         {
             newBullet.transform.position = SpawnShootPosition.position;
             newBullet.transform.rotation = Quaternion.identity;
@@ -57,10 +57,10 @@ public class EnemyShoot : MonoBehaviour
             Rigidbody2D newBulletRb = newBullet.GetComponent<Rigidbody2D>();
 
             Vector2 shootDirection = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
-            newBulletRb.velocity = Vector2.zero; // Reiniciar velocidad previa
+            newBulletRb.velocity = Vector2.zero; 
             newBulletRb.AddForce(shootDirection * BulletForce, ForceMode2D.Impulse);
 
-            // Desactivar la bala después de 2 segundos en lugar de destruirla
+            
             StartCoroutine(DisableBulletAfterTime(newBullet, 2f));
         }
     }
