@@ -77,7 +77,6 @@ public class ObjectPoolingManager : MonoBehaviour
         if (pool.Count > 0)
         {
             objInstance = pool[^1];
-            //pool.Remove(objInstance);
             pool.RemoveAt(pool.Count - 1);
         }
         else
@@ -97,21 +96,11 @@ public class ObjectPoolingManager : MonoBehaviour
 
         if (!selected.pool.Contains(obj))
             selected.pool.Add(obj);
-        //List<GameObject> pool = selected.pool;
-
-        //if (!pool.Contains(obj))
-        //    pool.Add(obj);
+        
     }
 
     private PoolInfo GetPoolByType(PoolObjectType type)
     {
-        //for (int i = 0; i < listOfPools.Count; i++)
-        //{
-        //    if (type == listOfPools[i].type)
-        //        return listOfPools[i];
-        //}
-
-        //return null;
         return listOfPools.Find(pool => pool.type == type);
     }
 
