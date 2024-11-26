@@ -4,8 +4,29 @@ using UnityEngine;
 
 public class EventController : MonoBehaviour
 {
+    public static EventController Instance;
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private Vida EnemyHealth;
+    public void GetInstance()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+    //Aca el método se aplica.
+    private void Awake()
+    {
+        GetInstance();
+    }
+
+
+
     private void OnEnable()
     {
         if (EnemyHealth != null)
