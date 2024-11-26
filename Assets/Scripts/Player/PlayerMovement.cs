@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     private LineRenderer lineRenderer;
 
-    public bool movingForward = true;
+   
    
     // Usado solo el nivel 1 para que se genere el circulo
     string nombreEscena = "GameScene";
@@ -38,17 +38,9 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        Cambiodireccion();
         Movement();
     }
 
-    void Cambiodireccion()
-    {
-        if (!PowerUp.canactivate && Input.GetMouseButtonDown(0))
-        {
-            movingForward = !movingForward;
-        }
-    }
     void DistribuirObjetosCircularmente()
     {
         int cantidad = Mathf.FloorToInt(2 * Mathf.PI * radio / distancebetweenpoint);
@@ -101,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Vector3.Distance(transform.position, PathPoints[PathPointsIndex].position) < 0.1f)
         {
-            if (movingForward)
+            if (ChangeDirection.movingForward)
             {
                 PathPointsIndex++;
                 if (PathPointsIndex >= PathPoints.Length)

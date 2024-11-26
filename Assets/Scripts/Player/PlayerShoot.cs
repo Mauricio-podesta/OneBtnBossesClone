@@ -8,6 +8,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private GameObject Bulletprefab;
     [SerializeField] private Transform SpawnShootPosition;
     [SerializeField] private GameObject Enemy;
+    [SerializeField] AudioClip shootsound;
 
     [Header("Stats")]
     [SerializeField] private float BulletForce;
@@ -42,5 +43,6 @@ public class PlayerShoot : MonoBehaviour
         Vector2 shootDirection = (Enemy.transform.position - transform.position).normalized;
         newBulletRb.AddForce(shootDirection * BulletForce, ForceMode2D.Impulse);
         Destroy(newBullet, 2f);
+        SoundManager.Instance.PlaySound(shootsound, this.transform.position);
     }
 }
