@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 6417204524830151681}
   - component: {fileID: 4289599656299375844}
   - component: {fileID: 7717281512251802479}
+  - component: {fileID: 7868135967054338566}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -129,6 +130,7 @@ Transform:
   - {fileID: 383217995034765612}
   - {fileID: 7256656484539976414}
   - {fileID: 9200289637412152335}
+  - {fileID: 7081717273895147955}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &476035501987819965
@@ -280,10 +282,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e784530b43c370141b01ae95ab6c3582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triangle: {fileID: 5552067709827065190, guid: 8d964de1e733abc4fb7018202453bbb3, type: 3}
+  poolObjectType: 2
   repeatTime: 4
   startDelay: 2
-  circleCenter: {fileID: 0}
+  circleCenter: {fileID: 7081717273895147955}
   offsetDistance: 1
 --- !u!114 &4289599656299375844
 MonoBehaviour:
@@ -292,12 +294,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007157778596653760}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4246c8e734fe1a1429df309942d1bb41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bulletprefab: {fileID: 5131928134839261106, guid: d9019053cdfea814abdde3ce3a13a5bc, type: 3}
+  bulletType: 0
   SpawnShootPosition: {fileID: 7256656484539976414}
   lineRenderer: {fileID: 8172319628130527528}
   BulletForce: 15
@@ -337,6 +339,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.50000006
+--- !u!114 &7868135967054338566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007157778596653760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da0777bf9c1978a46b55031a21c2b98e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxType: 3
+  repeatTime: 4
+  startDelay: 2
+  delayBetweenCycles: 1
+  fadeDuration: 1
 --- !u!1 &2156918987572538880
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,6 +744,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5256277660967718276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7081717273895147955}
+  m_Layer: 0
+  m_Name: circle center triangle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7081717273895147955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5256277660967718276}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.89142185, y: 0.7208546, z: 1.6364201}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7490446190531976656}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6269782450585351478
 GameObject:
   m_ObjectHideFlags: 0
