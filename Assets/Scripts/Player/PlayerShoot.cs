@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private PoolObjectType bulletType;
     [SerializeField] private Transform spawnShootPosition;
     [SerializeField] private GameObject enemy;
+    [SerializeField] AudioClip shootsound;
 
     [Header("Stats")]
     [SerializeField] private float bulletForce;
@@ -47,7 +49,7 @@ public class PlayerShoot : MonoBehaviour
             newBullet.SetActive(true);
 
             Rigidbody2D newBulletRb = newBullet.GetComponent<Rigidbody2D>();
-
+            SoundManager.Instance.PlaySound(shootsound, this.transform.position);
             if (newBulletRb != null)
             {
                 // Calcular la dirección de disparo hacia el enemigo
