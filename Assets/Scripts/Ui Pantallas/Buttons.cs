@@ -5,26 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class Buttons : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void SceneMenu()
     {
-        
+        SceneManager.LoadScene("Main Menu");
     }
-
-    // Update is called once per frame
-    void Update()
+    public void SceneGame()
     {
-        
+        SceneManager.LoadScene("GameScene");
     }
-
 
     public void ScenePlay1()
     {
-        SceneManager.LoadScene("LevelSelection");
+        SceneManager.LoadScene("Login");
     }
 
     public void QuitGame()
     {
         Application.Quit();
     }
+
+    public void SingIn()
+    {
+        SceneManager.LoadScene("LevelSelection");
+    }
 }
+
