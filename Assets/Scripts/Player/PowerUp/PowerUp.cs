@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.InputSystem;
 
 public class PowerUp : MonoBehaviour
 {
@@ -40,15 +41,10 @@ public class PowerUp : MonoBehaviour
 
     void Update()
     {
-        if (charge >= 100 && Input.GetMouseButtonDown(0))
-        {
-            canactivate = true;
-        }
         if (canactivate)
         {
             Discharge();
-            playerMovement.movementSpeed += velocidadIncremento;
-            playerMovement.movementSpeed = Mathf.Clamp(playerMovement.movementSpeed, 0f, MaxVelocity);
+            
         }
         else
         {
@@ -60,14 +56,16 @@ public class PowerUp : MonoBehaviour
     void Discharge()
     {
         charge -= (100/TimeDischarge) * Time.deltaTime;
-        
         charge = Mathf.Clamp(charge, 0f, 100f);
         UpdateHealthUI();
+
         if (charge <= 0) 
         {
-            canactivate &= false;
+            canactivate = false;
         }
+
         playerCollider.enabled = false;
+        playerMovement.movementSpeed = Mathf.Clamp(playerMovement.movementSpeed + velocidadIncremento, 0f, MaxVelocity);
     }
     void charger()
     {
@@ -76,6 +74,7 @@ public class PowerUp : MonoBehaviour
         //maximo de la carga
         charge = Mathf.Clamp(charge, 0f, 100f);
         UpdateHealthUI();
+        
         playerMovement.movementSpeed = normalvelocity;
         playerCollider.enabled = true;
     }
@@ -84,4 +83,12 @@ public class PowerUp : MonoBehaviour
         Powerupslide.value = charge;
 
     }
+    public void OnPowerUp()
+    {
+        if (charge >= 100)
+        {
+            canactivate = true;
+        }
+    }
+
 }

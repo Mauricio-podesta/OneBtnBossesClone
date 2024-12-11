@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PauseController : MonoBehaviour
 {
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape)) 
-        {
-            PauseManager.Instance.CambiarEstadoPausa();
-        }
+    public void OnPause()
+    {               
+            Debug.Log("todo ok");
+            PauseManager.Instance.TogglePauseState();         
     }
 }

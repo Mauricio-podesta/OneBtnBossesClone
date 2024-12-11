@@ -5,7 +5,7 @@ using UnityEngine;
 public class PauseManager : MonoBehaviour
 {
     public static PauseManager Instance;
-    private bool Pause = false;
+    private bool isPause = false;
     public GameObject PausePanel;
 
     public void Awake()
@@ -25,26 +25,25 @@ public class PauseManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-    public void CambiarEstadoPausa()
+    public void TogglePauseState()
     {
-        Pause = !Pause;
-        if (Pause)
+        isPause = !isPause;
+        if (isPause)
         {
-            PausarJuego();
+            PauseGame();
         }
         else
         {
-            ReanudarJuego();
+            ResumeGame();
         }
     }
-    private void PausarJuego()
+    private void PauseGame()
     {
         Time.timeScale = 0f;
         PausePanel.SetActive(true);
     }
 
-    
-    private void ReanudarJuego()
+    private void ResumeGame()
     {
         Time.timeScale = 1f;
         PausePanel.SetActive(false);

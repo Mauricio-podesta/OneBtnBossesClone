@@ -257,10 +257,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d60fa2b7195ebea4c9f8fdc764384bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bulletprefab: {fileID: 3634641111493663682, guid: bd21e474b5c63784cacf4eea080143c7, type: 3}
-  SpawnShootPosition: {fileID: 3211315528262496305}
-  Enemy: {fileID: 0}
-  BulletForce: 5
+  bulletType: 0
+  spawnShootPosition: {fileID: 0}
+  enemy: {fileID: 0}
+  shootsound: {fileID: 0}
+  bulletForce: 0
 --- !u!1 &4892954290955238691
 GameObject:
   m_ObjectHideFlags: 0

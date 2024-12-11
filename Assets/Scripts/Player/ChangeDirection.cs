@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class ChangeDirection : MonoBehaviour
 {
     public static bool movingForward = true;
@@ -11,13 +11,14 @@ public class ChangeDirection : MonoBehaviour
     }
     void Update()
     {
-        Cambiodireccion();
+        
     }
-    void Cambiodireccion()
+    public void OnCambiodireccion()
     {
-        if (!PowerUp.canactivate && Input.GetMouseButtonDown(0))
+        if (!PowerUp.canactivate)
         {
             movingForward = !movingForward;
+            
         }
     }
 }
