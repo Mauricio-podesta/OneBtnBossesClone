@@ -161,7 +161,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: 
+    Android: com.PodestaSosa.OneBtnBossesClone
     Standalone: com.PodestaSosa.OneBtnBossesClone
   buildNumber:
     Standalone: 0

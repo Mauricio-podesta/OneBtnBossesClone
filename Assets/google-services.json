@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "505017983014",
+    "project_id": "onebtnbossesclone-3c822",
+    "storage_bucket": "onebtnbossesclone-3c822.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505017983014:android:e5c41f1917a1937cc9c6e7",
+        "android_client_info": {
+          "package_name": "com.PodestaSosa.OneBtnBossesClone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARsnZIDPjKPRaF3bejORDzcUZZzBpMFw0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
