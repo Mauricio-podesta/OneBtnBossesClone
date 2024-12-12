@@ -1874,7 +1874,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 680877320}
-  - component: {fileID: 680877319}
+  - component: {fileID: 680877321}
   m_Layer: 0
   m_Name: Buttons Script
   m_TagString: Untagged
@@ -1882,18 +1882,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &680877319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680877318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f685a3f1dc7ca443a7149de077bb299, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &680877320
 Transform:
   m_ObjectHideFlags: 0
@@ -1909,6 +1897,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &680877321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680877318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04582282ba076104080a604182153502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &703333800
 GameObject:
   m_ObjectHideFlags: 0
@@ -3482,7 +3482,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 680877319}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LoseVictoryButtons, Assembly-CSharp
         m_MethodName: SceneGame
         m_Mode: 1
@@ -5382,7 +5382,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 680877319}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LoseVictoryButtons, Assembly-CSharp
         m_MethodName: SceneMenu
         m_Mode: 1
