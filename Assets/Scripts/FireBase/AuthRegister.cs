@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AuthRegister : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class AuthRegister : MonoBehaviour
     public void RegisterButton()
     {
         StartCoroutine(Register(emailRegisterField.text, passwordRegisterField.text, usernameRegisterField.text));
+
+        SceneManager.LoadScene("LevelSelection");
     }
 
     private IEnumerator Register(string _email, string _password, string _userName)

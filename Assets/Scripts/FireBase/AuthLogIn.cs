@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AuthLogIn : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class AuthLogIn : MonoBehaviour
     public void LoginButton()
     {
         StartCoroutine(Login(emailLoginField.text, passwordLoginField.text));
+
+        SceneManager.LoadScene("LevelSelection");
     }
 
     private IEnumerator Login(string _email, string _password)
