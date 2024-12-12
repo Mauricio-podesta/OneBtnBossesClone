@@ -5,10 +5,7 @@ using UnityEngine.InputSystem;
 public class ChangeDirection : MonoBehaviour
 {
     public static bool movingForward = true;
-    void Start()
-    {
-        
-    }
+    
     void Update()
     {
         

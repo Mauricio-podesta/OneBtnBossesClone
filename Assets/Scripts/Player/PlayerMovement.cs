@@ -14,13 +14,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float radio = 5f;
     [SerializeField] float distancebetweenpoint = 1f;
 
+    public static bool movingForward = true;
 
     private int PathPointsIndex = 0;
 
     private LineRenderer lineRenderer;
 
-   
-   
     // Usado solo el nivel 1 para que se genere el circulo
     string nombreEscena = "GameScene";
 
@@ -39,7 +38,10 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Movement();
+        
     }
+
+    
 
     void DistribuirObjetosCircularmente()
     {
@@ -111,5 +113,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
 }
 
