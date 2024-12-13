@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
 public class TestButtons
@@ -10,6 +11,8 @@ public class TestButtons
     private GameObject targetCanvas;
     private SwitchCanvas switchCanvas;
     // A Test behaves as an ordinary method
+
+    #region Unit Tests Switch Canvas
     [SetUp]
     public void Setup()
     {
@@ -40,4 +43,10 @@ public class TestButtons
         Assert.IsFalse(currentCanvas.activeSelf);
         Assert.IsTrue(targetCanvas.activeSelf);
     }
+    #endregion
+
+    #region Unit Test Buttons Switch Scenes
+   
+    
+    #endregion
 }
