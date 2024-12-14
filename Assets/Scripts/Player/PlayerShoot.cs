@@ -8,7 +8,7 @@ public class PlayerShoot : MonoBehaviour
     [Header("Referencias")]
     [SerializeField] private PoolObjectType bulletType;
     [SerializeField] private Transform spawnShootPosition;
-    [SerializeField] private GameObject enemy;
+    [SerializeField] public GameObject enemy;
     [SerializeField] AudioClip shootsound;
 
     [Header("Stats")]

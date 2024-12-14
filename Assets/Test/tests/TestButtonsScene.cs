@@ -8,6 +8,7 @@ using UnityEngine.TestTools;
 public class TestButtonsScene
 {
     private Buttons buttons;
+ 
 
     [SetUp]
     public void Setup2()
