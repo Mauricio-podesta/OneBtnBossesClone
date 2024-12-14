@@ -56,7 +56,6 @@ public class LevelsButtons : MonoBehaviour
 
     }
 
-
     public void ChangeScene()
     {
         if (!string.IsNullOrEmpty(sceneToLoad))
