@@ -8,9 +8,12 @@ public class LevelsButtons : MonoBehaviour
 {
     public static LevelsButtons Instance;
     [SerializeField] private GameObject choiceCanvas;
-    [SerializeField] private Button powerUpButton;  
+    [SerializeField] private Button powerUpButton;
     [SerializeField] private Button noPowerUpButton;
-   
+    
+    [SerializeField] private Button sceneChangeButton; // Botón para cambiar de escena
+    [SerializeField] private string sceneToLoad;       // Nombre de la escena a cargar
+
 
     private AudioSource audioSource;
 
@@ -39,44 +42,26 @@ public class LevelsButtons : MonoBehaviour
         {
             noPowerUpButton.onClick.AddListener(() => SelectOption(false));
         }
-       
+
+        sceneChangeButton.gameObject.SetActive(false);
+
         audioSource = gameObject.AddComponent<AudioSource>();
     }
-    public void ShowChoicePanel()
+
+    private void SelectOption(bool usePowerUpOption)
     {
-        if (choiceCanvas != null)
-        {
-            choiceCanvas.SetActive(true);
-        }
+        usePowerUp = usePowerUpOption;
+
+        sceneChangeButton.gameObject.SetActive(true);
+
     }
-    private void CloseChoicePanel()
+
+
+    public void ChangeScene()
     {
-        if (choiceCanvas != null)
+        if (!string.IsNullOrEmpty(sceneToLoad))
         {
-            choiceCanvas.SetActive(false);
+            SceneManager.LoadScene(sceneToLoad);
         }
-    }
-    
-        private void SelectOption(bool usePowerUpOption)
-        {
-            usePowerUp = usePowerUpOption;
-
-            if (usePowerUp)
-            {
-                Debug.Log("Movimiento con Power-Up seleccionado");
-            }
-            else
-            {
-                Debug.Log("Movimiento sin Power-Up seleccionado");
-            }
-
-            ScenePlay();
-        }
-
-    
-
-    public void ScenePlay()
-    {
-        SceneManager.LoadScene("GameScene");
     }
 }
