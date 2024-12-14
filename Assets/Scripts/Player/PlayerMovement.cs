@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private LineRenderer lineRenderer;
 
     // Usado solo el nivel 1 para que se genere el circulo
-    string nombreEscena = "GameScene";
+    string nombreEscena = "Level 1";
 
     void Start()
     {
