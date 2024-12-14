@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2829481619867934774}
   - component: {fileID: 6668686948969893583}
-  - component: {fileID: -1076276677579072765}
   - component: {fileID: 7561332111259119568}
   - component: {fileID: 8534794719452507042}
-  - component: {fileID: 2446958898776371148}
+  - component: {fileID: -9079162021492655946}
+  - component: {fileID: -1932009724525990281}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -89,23 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-1076276677579072765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2879835808298485956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f0c867525621b3488d5522e9faacdc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PathPoints: []
-  PathPlayer: {fileID: 0}
-  movementSpeed: 5
-  radio: 5
-  distancebetweenpoint: 1
 --- !u!120 &7561332111259119568
 LineRenderer:
   serializedVersion: 2
@@ -245,22 +228,39 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &2446958898776371148
+--- !u!114 &-9079162021492655946
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2879835808298485956}
-  m_Enabled: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0c867525621b3488d5522e9faacdc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PathPoints: []
+  PathPlayer: {fileID: 0}
+  movementSpeed: 5
+  radio: 5
+  distancebetweenpoint: 1
+--- !u!114 &-1932009724525990281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2879835808298485956}
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d60fa2b7195ebea4c9f8fdc764384bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletType: 0
   spawnShootPosition: {fileID: 0}
-  enemy: {fileID: 0}
-  shootsound: {fileID: 0}
+  enemy: {fileID: 2007157778596653760, guid: ee922220ea64648459187132b180777b, type: 3}
+  shootsound: {fileID: 8300000, guid: f0f0348e697ed2e44afd91ee4d81268f, type: 3}
   bulletForce: 0
 --- !u!1 &4892954290955238691
 GameObject:
