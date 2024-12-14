@@ -12,7 +12,7 @@ public class TestButtons
     private SwitchCanvas switchCanvas;
     // A Test behaves as an ordinary method
 
-    #region Unit Tests Switch Canvas
+    
     [SetUp]
     public void Setup()
     {
@@ -43,10 +43,5 @@ public class TestButtons
         Assert.IsFalse(currentCanvas.activeSelf);
         Assert.IsTrue(targetCanvas.activeSelf);
     }
-    #endregion
-
-    #region Unit Test Buttons Switch Scenes
    
-    
-    #endregion
 }
