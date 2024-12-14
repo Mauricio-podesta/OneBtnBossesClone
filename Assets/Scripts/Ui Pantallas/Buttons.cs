@@ -11,7 +11,7 @@ public class Buttons : MonoBehaviour
     }
     public void LevelOne()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Level 1");
     }
     
 
