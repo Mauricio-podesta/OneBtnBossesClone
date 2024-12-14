@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class LevelsButtons : MonoBehaviour
 {
     public static LevelsButtons Instance;
-    [SerializeField] private GameObject choicePanel;
+    [SerializeField] private GameObject choiceCanvas;
     [SerializeField] private Button powerUpButton;  
     [SerializeField] private Button noPowerUpButton;
-    [SerializeField] private Button cancelButton;
+   
 
     private AudioSource audioSource;
 
@@ -39,25 +39,21 @@ public class LevelsButtons : MonoBehaviour
         {
             noPowerUpButton.onClick.AddListener(() => SelectOption(false));
         }
-        if (cancelButton != null)
-        {
-            cancelButton.onClick.AddListener(CloseChoicePanel);
-        }
-
+       
         audioSource = gameObject.AddComponent<AudioSource>();
     }
     public void ShowChoicePanel()
     {
-        if (choicePanel != null)
+        if (choiceCanvas != null)
         {
-            choicePanel.SetActive(true);
+            choiceCanvas.SetActive(true);
         }
     }
     private void CloseChoicePanel()
     {
-        if (choicePanel != null)
+        if (choiceCanvas != null)
         {
-            choicePanel.SetActive(false);
+            choiceCanvas.SetActive(false);
         }
     }
     

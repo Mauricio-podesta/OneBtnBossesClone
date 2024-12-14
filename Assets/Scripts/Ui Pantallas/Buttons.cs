@@ -9,12 +9,13 @@ public class Buttons : MonoBehaviour
     {
         SceneManager.LoadScene("Main Menu");
     }
-    public void SceneGame()
+    public void LevelOne()
     {
         SceneManager.LoadScene("GameScene");
     }
+    
 
-    public void ScenePlay1()
+    public void Play()
     {
         SceneManager.LoadScene("Login");
     }
@@ -24,9 +25,5 @@ public class Buttons : MonoBehaviour
         Application.Quit();
     }
 
-    public void SingIn()
-    {
-        SceneManager.LoadScene("LevelSelection");
-    }
 }
 
