@@ -7,10 +7,13 @@ using UnityEngine.UI;
 public class LevelsButtons : MonoBehaviour
 {
     public static LevelsButtons Instance;
-    [SerializeField] private GameObject choicePanel;
-    [SerializeField] private Button powerUpButton;  
+    [SerializeField] private GameObject choiceCanvas;
+    [SerializeField] private Button powerUpButton;
     [SerializeField] private Button noPowerUpButton;
-    [SerializeField] private Button cancelButton;
+    
+    [SerializeField] private Button sceneChangeButton; // Botón para cambiar de escena
+    [SerializeField] private string sceneToLoad;       // Nombre de la escena a cargar
+
 
     private AudioSource audioSource;
 
@@ -39,48 +42,19 @@ public class LevelsButtons : MonoBehaviour
         {
             noPowerUpButton.onClick.AddListener(() => SelectOption(false));
         }
-        if (cancelButton != null)
-        {
-            cancelButton.onClick.AddListener(CloseChoicePanel);
-        }
+
+        sceneChangeButton.gameObject.SetActive(false);
 
         audioSource = gameObject.AddComponent<AudioSource>();
     }
-    public void ShowChoicePanel()
+
+    private void SelectOption(bool usePowerUpOption)
     {
-        if (choicePanel != null)
-        {
-            choicePanel.SetActive(true);
-        }
+        usePowerUp = usePowerUpOption;
+
+        sceneChangeButton.gameObject.SetActive(true);
+
     }
-    private void CloseChoicePanel()
-    {
-        if (choicePanel != null)
-        {
-            choicePanel.SetActive(false);
-        }
-    }
-    
-        private void SelectOption(bool usePowerUpOption)
-        {
-            usePowerUp = usePowerUpOption;
 
-            if (usePowerUp)
-            {
-                Debug.Log("Movimiento con Power-Up seleccionado");
-            }
-            else
-            {
-                Debug.Log("Movimiento sin Power-Up seleccionado");
-            }
-
-            ScenePlay();
-        }
-
-    
-
-    public void ScenePlay()
-    {
-        SceneManager.LoadScene("GameScene");
-    }
+  
 }

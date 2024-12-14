@@ -6,8 +6,7 @@ using UnityEngine.InputSystem;
 public class PauseController : MonoBehaviour
 {
     public void OnPause()
-    {               
-            Debug.Log("todo ok");
-            PauseManager.Instance.TogglePauseState();         
+    {       
+        PauseManager.Instance.TogglePauseState();         
     }
 }

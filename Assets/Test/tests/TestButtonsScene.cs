@@ -36,24 +36,24 @@ public class TestButtonsScene
     public System.Collections.IEnumerator SceneGame_LoadsGameScene()
     {
         // Llama al método SceneGame()
-        buttons.SceneGame();
+        buttons.LevelOne();
 
         // Espera a que la escena "GameScene" cargue
-        var asyncLoad = SceneManager.LoadSceneAsync("GameScene");
+        var asyncLoad = SceneManager.LoadSceneAsync("Level 1");
         while (!asyncLoad.isDone)
         {
             yield return null; // Espera hasta que la escena termine de cargar
         }
 
         // Verifica que la escena activa es "GameScene"
-        Assert.AreEqual("GameScene", SceneManager.GetActiveScene().name);
+        Assert.AreEqual("Level 1", SceneManager.GetActiveScene().name);
     }
 
     [UnityTest]
     public System.Collections.IEnumerator ScenePlay1_LoadsLogin()
     {
         // Llama al método ScenePlay1()
-        buttons.ScenePlay1();
+        buttons.Play();
 
         // Espera a que la escena "Login" cargue
         var asyncLoad = SceneManager.LoadSceneAsync("Login");
