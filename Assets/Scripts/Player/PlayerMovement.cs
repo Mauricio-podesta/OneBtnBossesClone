@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Referencias")]
     public Transform[] PathPoints;
-    [SerializeField] Transform PathPlayer;
+    [SerializeField] public Transform PathPlayer;
 
     [Header("Stats")]
     [SerializeField]public float movementSpeed = 5f;

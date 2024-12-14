@@ -4,7 +4,6 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "ButtonScript",
         "Scripts",
         "Unity.InputSystem",
         "Unity.InputSystem.TestFramework"

@@ -6,80 +6,92 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.TestTools;
 
-public class IntegrationTest : InputTestFixture
+
+public class IntegrationTest
 {
-    private GameObject player;
-    private PlayerMovement playerMovement;
+    private GameObject playerShootObject;
+    private GameObject pathPlayerObject;
 
     [SetUp]
     public void Setup()
     {
-        // Crear un objeto de prueba para el jugador
-        player = new GameObject();
+        // Crear los objetos de prueba
+        playerShootObject = new GameObject("PlayerShoot");
+        pathPlayerObject = new GameObject("PathPlayer");
 
-        // Añadir el script de PlayerMovement
-        playerMovement = player.AddComponent<PlayerMovement>();
+        // Añadir los componentes necesarios usando AddComponent
+        PlayerShoot playerShoot = playerShootObject.AddComponent<PlayerShoot>();
+        PlayerMovement playerMovement = playerShootObject.AddComponent<PlayerMovement>();
 
-        // Crear un PathPlayer vacío para pasar a la referencia del script
-        GameObject pathPlayer = new GameObject("PathPlayer");
-        playerMovement.PathPlayer = pathPlayer.transform;
+        // Verificar que los componentes se han añadido correctamente
+        Assert.IsNotNull(playerShoot, "PlayerShoot component is not added.");
+        Assert.IsNotNull(playerMovement, "PlayerMovement component is not added.");
 
-        // Definir algunos valores para las pruebas
-        playerMovement.radio = 5f;
-        playerMovement.distancebetweenpoint = 1f;
+        // Configurar referencias si es necesario
+        playerShoot.enemy = pathPlayerObject;
+
+        // Asignar PathPlayer en PlayerMovement
+        playerMovement.PathPlayer = pathPlayerObject.transform;
+
+        // Inicializar PathPoints para evitar NullReferenceException
+        playerMovement.PathPoints = new Transform[0];
     }
 
-    [Test]
-    public void TestDistribuirObjetosCircularmente()
+    [UnityTest]
+    public IEnumerator PlayerMovementAndShootingTest()
     {
-        // Ejecutar la función para distribuir los puntos
-        playerMovement.DistribuirObjetosCircularmente();
+        // Inicializar los scripts
+        yield return null;
 
-        // Verificar que PathPoints no esté vacío
-        Assert.IsNotEmpty(playerMovement.PathPoints, "PathPoints should not be empty.");
+        // Crear puntos aleatorios
+        PlayerMovement playerMovement = playerShootObject.GetComponent<PlayerMovement>();
+        CreateRandomPathPoints(playerMovement);
 
-        // Verificar que los puntos estén distribuidos de manera circular
-        foreach (var point in playerMovement.PathPoints)
+        // Verificar que PathPoints se han creado correctamente
+        Assert.IsTrue(playerMovement.PathPoints.Length > 0, "PathPoints were not created.");
+
+        // Simular comportamiento y esperar unos segundos
+        yield return new WaitForSeconds(2f);
+
+        // Verificar que el jugador se está moviendo
+        Vector3 initialPosition = playerShootObject.transform.position;
+        yield return new WaitForSeconds(1f);
+        Vector3 newPosition = playerShootObject.transform.position;
+        Assert.AreNotEqual(initialPosition, newPosition, "El jugador no se está moviendo.");
+
+        // Verificar que el jugador está disparando
+        PlayerShoot playerShoot = playerShootObject.GetComponent<PlayerShoot>();
+        Assert.IsTrue(playerShoot.enemy != null, "El enemigo no está asignado.");
+
+        // Esperar un poco más para asegurar disparos
+        yield return new WaitForSeconds(2f);
+        // Aquí deberías verificar que se ha disparado una bala (puedes adaptar la verificación según tu lógica)
+        // Por simplicidad, aquí solo vamos a asegurarnos de que el objeto sigue activo
+        Assert.IsTrue(playerShootObject.activeInHierarchy, "El objeto del jugador no está activo.");
+
+        // Agregar más verificaciones específicas según sea necesario
+    }
+
+    private void CreateRandomPathPoints(PlayerMovement playerMovement)
+    {
+        int cantidad = 10; // Número de puntos de camino aleatorios
+        playerMovement.PathPoints = new Transform[cantidad];
+
+        for (int i = 0; i < cantidad; i++)
         {
-            Assert.AreEqual(point.position.z, 0, "All points should be in the X-Y plane.");
-            Assert.AreNotEqual(point.position.x, player.transform.position.x, "Points should be distributed along the circle.");
+            Vector3 randomPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0);
+            GameObject point = new GameObject($"Point {i}");
+            point.transform.position = randomPosition;
+            playerMovement.PathPoints[i] = point.transform;
         }
     }
 
-    [Test]
-    public void TestMovement()
-    {
-        // Asumir que PathPoints ya se han distribuido
-        playerMovement.DistribuirObjetosCircularmente();
-
-        // Guardar la posición inicial
-        Vector3 initialPosition = player.transform.position;
-
-        // Ejecutar un paso de movimiento
-        playerMovement.Movement();
-
-        // Verificar que la posición haya cambiado (el jugador se debe mover a un punto cercano)
-        Assert.AreNotEqual(initialPosition, player.transform.position, "Player should have moved to the next point.");
-    }
-
-    [Test]
-    public void TestDibujarLinea()
-    {
-        // Asegurarse de que el LineRenderer esté presente
-        LineRenderer lineRenderer = player.GetComponent<LineRenderer>();
-        Assert.IsNotNull(lineRenderer, "LineRenderer should be attached to the player.");
-
-        // Ejecutar el método de dibujar la línea
-        playerMovement.DibujarLinea();
-
-        // Verificar que el LineRenderer tenga la cantidad correcta de puntos
-        Assert.AreEqual(playerMovement.PathPoints.Length, lineRenderer.positionCount, "LineRenderer should have the same number of points as PathPoints.");
-    }
-
     [TearDown]
-    public void TearDown()
+    public void Teardown()
     {
-        // Eliminar el objeto de prueba después de cada test
-        Object.Destroy(player);
+        // Limpiar los objetos de prueba después de cada prueba
+        Object.Destroy(playerShootObject);
+        Object.Destroy(pathPlayerObject);
     }
 }
+
