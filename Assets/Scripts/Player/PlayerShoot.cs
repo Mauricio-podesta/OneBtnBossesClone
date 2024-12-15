@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class PlayerShoot : MonoBehaviour
 {
     [Header("Referencias")]
-    [SerializeField] private PoolObjectType bulletType;
-    [SerializeField] private Transform spawnShootPosition;
+    [SerializeField] public PoolObjectType bulletType;
+    [SerializeField] public Transform spawnShootPosition;
     [SerializeField] public GameObject enemy;
     [SerializeField] AudioClip shootsound;
 
@@ -36,9 +37,8 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {   
     }
-    void Shoot()
+    public void Shoot()
     {
-        Debug.Log("Entering Shoot method");
         // Obtener la bala del Object Pooling Manager
         GameObject newBullet = ObjectPoolingManager.Instance.GetPooledObject(bulletType);
 

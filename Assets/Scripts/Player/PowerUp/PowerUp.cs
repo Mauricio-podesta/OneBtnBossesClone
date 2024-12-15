@@ -20,6 +20,7 @@ public class PowerUp : MonoBehaviour
 
     //datos privados
     public static bool canactivate = false;
+    private bool isCooldown = false;
     float normalvelocity;
     private Collider2D playerCollider;
 
@@ -38,13 +39,17 @@ public class PowerUp : MonoBehaviour
         
      
     }
-
+    private IEnumerator Cooldown() 
+    {
+        isCooldown = true; 
+        yield return new WaitForSeconds(5f); 
+        isCooldown = false; 
+    }
     void Update()
     {
-        if (canactivate)
+        if (canactivate && !isCooldown && charge > 0)
         {
-            Discharge();
-            
+            Discharge();    
         }
         else
         {
@@ -83,12 +88,15 @@ public class PowerUp : MonoBehaviour
         Powerupslide.value = charge;
 
     }
-    public void OnPowerUp()
+    public void OnPowerUp(InputAction.CallbackContext context)
     {
-        if (charge >= 100)
+        if (charge >= 0 && !isCooldown)
         {
             canactivate = true;
         }
+        else if (context.canceled) 
+        { canactivate = false; 
+           StartCoroutine(Cooldown()); 
+        }
     }
-
 }

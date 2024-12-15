@@ -2218,6 +2218,17 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1772226662 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -9079162021492655946, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
+  m_PrefabInstance: {fileID: 1485591263}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772226643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0c867525621b3488d5522e9faacdc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1812283000
 GameObject:
   m_ObjectHideFlags: 0
@@ -2440,7 +2451,7 @@ MonoBehaviour:
   MaxVelocity: 15
   Timecharge: 8
   TimeDischarge: 6
-  playerMovement: {fileID: 0}
+  playerMovement: {fileID: 1772226662}
   Powerupslide: {fileID: 1415485408}
 --- !u!4 &1891983319
 Transform:
