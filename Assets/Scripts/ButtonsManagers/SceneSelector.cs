@@ -19,6 +19,7 @@ public class SceneSelector : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(selectedScene))
         {
+            Time.timeScale = 1f;
             SceneManager.LoadScene(selectedScene);
         }
         

@@ -260,7 +260,7 @@ MonoBehaviour:
   bulletType: 0
   spawnShootPosition: {fileID: 0}
   enemy: {fileID: 2007157778596653760, guid: ee922220ea64648459187132b180777b, type: 3}
-  shootsound: {fileID: 8300000, guid: f0f0348e697ed2e44afd91ee4d81268f, type: 3}
+  shootsound: {fileID: 0}
   bulletForce: 0
 --- !u!1 &4892954290955238691
 GameObject:
