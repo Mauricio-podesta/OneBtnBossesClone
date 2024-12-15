@@ -871,6 +871,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &675724345 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3211315528262496305, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
+  m_PrefabInstance: {fileID: 1485591263}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &723054303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1931,10 +1936,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9079162021492655946, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
+      propertyPath: PathPoints.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -9079162021492655946, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
+      propertyPath: PathPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 723054304}
+    - target: {fileID: -9079162021492655946, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
+      propertyPath: PathPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 172085580}
+    - target: {fileID: -9079162021492655946, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
+      propertyPath: PathPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 1041354405}
+    - target: {fileID: -9079162021492655946, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
+      propertyPath: PathPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 1485882804}
+    - target: {fileID: -9079162021492655946, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
+      propertyPath: PathPoints.Array.data[4]
+      value: 
+      objectReference: {fileID: 1149373013}
+    - target: {fileID: -9079162021492655946, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
+      propertyPath: PathPoints.Array.data[5]
+      value: 
+      objectReference: {fileID: 25758717}
+    - target: {fileID: -9079162021492655946, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
+      propertyPath: PathPoints.Array.data[6]
+      value: 
+      objectReference: {fileID: 1035270803}
+    - target: {fileID: -9079162021492655946, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
+      propertyPath: PathPoints.Array.data[7]
+      value: 
+      objectReference: {fileID: 650191038}
     - target: {fileID: -1932009724525990281, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
       propertyPath: bulletForce
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: -1932009724525990281, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
+      propertyPath: spawnShootPosition
+      value: 
+      objectReference: {fileID: 675724345}
     - target: {fileID: -1076276677579072765, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
       propertyPath: PathPlayer
       value: 

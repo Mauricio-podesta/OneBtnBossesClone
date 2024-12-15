@@ -5,11 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class Buttons : MonoBehaviour
 {
-    private string sceneToLoad;
+    private static string selectedLevel; // Variable estática para mantener el nivel seleccionado
 
-    public void ChangeScene(string sceneToLoad)
+    // Método para seleccionar el nivel
+    public void SelectLevel(string levelName)
     {
-        SceneManager.LoadScene(sceneToLoad);
+        selectedLevel = levelName;
+        Debug.Log("Nivel seleccionado: " + selectedLevel);
     }
+
+    // Método para cambiar a la escena seleccionada
+    public void ChangeToSelectedLevel()
+    {
+        if (!string.IsNullOrEmpty(selectedLevel))
+        {
+            SceneManager.LoadScene(selectedLevel);
+        }
+        else
+        {
+            Debug.LogWarning("No se ha seleccionado ningún nivel.");
+        }
+    }
+
+
 }
 

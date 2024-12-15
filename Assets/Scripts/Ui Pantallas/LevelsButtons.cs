@@ -11,10 +11,8 @@ public class LevelsButtons : MonoBehaviour
     [SerializeField] private Button powerUpButton;
     [SerializeField] private Button noPowerUpButton;
     
-    [SerializeField] private Button sceneChangeButton; // Botón para cambiar de escena
-    [SerializeField] private string sceneToLoad;       // Nombre de la escena a cargar
-
-
+    [SerializeField] private Button sceneChangeButton; 
+       
     private AudioSource audioSource;
 
     public bool usePowerUp { get; private set; }
@@ -55,8 +53,4 @@ public class LevelsButtons : MonoBehaviour
         sceneChangeButton.gameObject.SetActive(true);
 
     }
-
-   
-
-
 }

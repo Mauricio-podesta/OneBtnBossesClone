@@ -367,7 +367,6 @@ MonoBehaviour:
   powerUpButton: {fileID: 1826946384}
   noPowerUpButton: {fileID: 1284702909}
   sceneChangeButton: {fileID: 1555303058}
-  sceneToLoad: Level 2
 --- !u!4 &384016114
 Transform:
   m_ObjectHideFlags: 0
@@ -1510,9 +1509,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 384016115}
+        m_TargetAssemblyTypeName: SwitchCanvas, Scripts
+        m_MethodName: CanvasSwitcher
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Level 3
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 384016116}
         m_TargetAssemblyTypeName: Buttons, Scripts
-        m_MethodName: ChangeScene
+        m_MethodName: SelectLevel
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1659,9 +1670,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 384016115}
+        m_TargetAssemblyTypeName: SwitchCanvas, Scripts
+        m_MethodName: CanvasSwitcher
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Level 2
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 384016116}
         m_TargetAssemblyTypeName: Buttons, Scripts
-        m_MethodName: ChangeScene
+        m_MethodName: SelectLevel
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2598,16 +2621,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 384016113}
-        m_TargetAssemblyTypeName: LevelsButtons, ButtonScript
-        m_MethodName: ChangeScene
+      - m_Target: {fileID: 384016116}
+        m_TargetAssemblyTypeName: Buttons, Scripts
+        m_MethodName: ChangeToSelectedLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Level 2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1555303059
