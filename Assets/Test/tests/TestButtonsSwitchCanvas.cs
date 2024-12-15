@@ -12,7 +12,9 @@ public class TestButtons
     private SwitchCanvas switchCanvas;
     // A Test behaves as an ordinary method
 
-    
+    private SceneSelector sceneSelector;
+
+
     [SetUp]
     public void Setup()
     {
@@ -27,6 +29,7 @@ public class TestButtons
         // Asignar los objetos de prueba al script
         switchCanvas.currentCanvas = currentCanvas;
         switchCanvas.targetCanvas = targetCanvas;
+
     }
 
     [Test]
@@ -43,5 +46,7 @@ public class TestButtons
         Assert.IsFalse(currentCanvas.activeSelf);
         Assert.IsTrue(targetCanvas.activeSelf);
     }
-   
+
+    
+
 }

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
     // Referencias relacionadas con el tiempo
     [Header("Time Management")]
     [SerializeField] private TextMeshProUGUI timeText; // Referencia al componente de texto en la UI para el tiempo de juego
@@ -24,6 +26,22 @@ public class GameManager : MonoBehaviour
     private float gameTime; // Tiempo de juego en segundos
     private float bestTime; // Mejor tiempo registrado
 
+    public void GetInstance()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+    private void Awake()
+    {
+        GetInstance();
+    }
     void Start()
     {
         InitializeGameTime();
