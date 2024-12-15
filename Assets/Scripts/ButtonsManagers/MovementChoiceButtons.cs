@@ -4,17 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelsButtons : MonoBehaviour
+public class MovementChoiceButtons : MonoBehaviour
 {
-    public static LevelsButtons Instance;
+    public static MovementChoiceButtons Instance;
     [SerializeField] private GameObject choiceCanvas;
     [SerializeField] private Button powerUpButton;
     [SerializeField] private Button noPowerUpButton;
     
-    [SerializeField] private Button sceneChangeButton; // Botón para cambiar de escena
-    [SerializeField] private string sceneToLoad;       // Nombre de la escena a cargar
-
-
+    [SerializeField] private Button sceneChangeButton; 
+       
     private AudioSource audioSource;
 
     public bool usePowerUp { get; private set; }
@@ -34,15 +32,10 @@ public class LevelsButtons : MonoBehaviour
     {
         GetInstance();
 
-        if (powerUpButton != null)
-        {
-            powerUpButton.onClick.AddListener(() => SelectOption(true));
-        }
-        if (noPowerUpButton != null)
-        {
-            noPowerUpButton.onClick.AddListener(() => SelectOption(false));
-        }
-
+        powerUpButton.onClick.AddListener(() => SelectOption(true));
+        
+        noPowerUpButton.onClick.AddListener(() => SelectOption(false));
+        
         sceneChangeButton.gameObject.SetActive(false);
 
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -55,6 +48,4 @@ public class LevelsButtons : MonoBehaviour
         sceneChangeButton.gameObject.SetActive(true);
 
     }
-
-  
 }

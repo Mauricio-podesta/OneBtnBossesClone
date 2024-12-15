@@ -5,8 +5,26 @@ using UnityEngine;
 public class EventController : MonoBehaviour
 {
     public static EventController Instance;
+
+    // Referencias relacionadas con la salud del jugador y del enemigo
+    [Header("Health Management")]
     [SerializeField] private PlayerHealth playerHealth;
-    [SerializeField] private Vida EnemyHealth;
+    [SerializeField] private Vida enemyHealth;
+
+    // Referencia al GameManager
+    [Header("Game Management")]
+    private GameManager gameManager;
+
+    // Referencia a la UI de salud del jugador
+    [Header("UI Management")]
+    [SerializeField] private PlayerHealthUI playerHealthUI;
+
+    private void Awake()
+    {
+        GetInstance();
+        gameManager = FindObjectOfType<GameManager>(); // Encuentra el GameManager en la escena
+    }
+
     public void GetInstance()
     {
         if (Instance != null && Instance != this)
@@ -19,64 +37,19 @@ public class EventController : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-    //Aca el método se aplica.
-    private void Awake()
-    {
-        GetInstance();
-    }
-
-
 
     private void OnEnable()
     {
-        if (EnemyHealth != null)
-        {
-            EnemyHealth.OnEnemyDeath += HandleEnemyDeath;
-        }
-        else
-        {
-            Debug.Log("Null Enemy health");
-        }
-
-        if (playerHealth != null)
-        {
-            playerHealth.OnPlayerDeath += HandlePlayerDeath;
-        }
-        else
-        {
-            Debug.Log("Null player health");
-        }
+        enemyHealth.OnEnemyDeath += gameManager.HandleEnemyDeath;
+        playerHealth.OnPlayerDeath += gameManager.HandlePlayerDeath;
+        playerHealth.OnPlayerHurt += playerHealthUI.DecreaseHealth;
     }
 
     private void OnDisable()
     {
-        if (EnemyHealth != null)
-        {
-            EnemyHealth.OnEnemyDeath -= HandleEnemyDeath;
-        }
-        else
-        {
-            Debug.Log("Null Enemy health");
-        }
-
-
-        if (playerHealth != null)
-        {
-            playerHealth.OnPlayerDeath -= HandlePlayerDeath;
-        }
-        else
-        {
-            Debug.Log("Null player health");
-        }
+        enemyHealth.OnEnemyDeath -= gameManager.HandleEnemyDeath;
+        playerHealth.OnPlayerDeath -= gameManager.HandlePlayerDeath;
+        playerHealth.OnPlayerHurt -= playerHealthUI.DecreaseHealth;
     }
-    private void HandleEnemyDeath()
-    {
-        Debug.Log("Enemy has died!");
-    }
-    private void HandlePlayerDeath()
-    {
 
-        Debug.Log("Player has died!");
-
-    }
 }

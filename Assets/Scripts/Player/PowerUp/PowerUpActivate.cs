@@ -10,9 +10,9 @@ public class PowerUpActivate : MonoBehaviour
     void Start()
     {
         // Verificar la decisión del jugador desde el Singleton
-        if (LevelsButtons.Instance != null)
+        if (MovementChoiceButtons.Instance != null)
         {
-            if (LevelsButtons.Instance.usePowerUp)
+            if (MovementChoiceButtons.Instance.usePowerUp)
             {
                 ActivatePowerUp();
             }

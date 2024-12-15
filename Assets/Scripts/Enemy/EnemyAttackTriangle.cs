@@ -2,52 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttackTriangle : MonoBehaviour
+public class EnemyAttackTriangle : EnemyAttackBase
 {
-    [SerializeField] private PoolObjectType poolObjectType;
-    private PlayerMovement playerMovement;
-
-    public float repeatTime;
-    public float startDelay;
-
     public Transform circleCenter;
     public float offsetDistance;
 
-    void Start()
-    {
-        playerMovement = FindObjectOfType<PlayerMovement>();
-
-        Invoke(nameof(StartCoroutineWithDelay), startDelay);
-    }
-
-    void StartCoroutineWithDelay()
-    {
-        StartCoroutine(RepeatPoolAndReturn());
-    }
-
-    IEnumerator RepeatPoolAndReturn()
+    public override IEnumerator RepeatAttack()
     {
         while (true)
         {
-            int randomIndex = Random.Range(0, playerMovement.PathPoints.Length);
-            Transform randomPathPoint = playerMovement.PathPoints[randomIndex];
+            Transform randomPathPoint = GetRandomPathPoint();
+            Quaternion rotation = CalculateRotation(randomPathPoint);
 
-            Vector3 direction = (randomPathPoint.position - circleCenter.position).normalized;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180f;
-            Quaternion rotation = Quaternion.Euler(0, 0, angle);
-
-            // Obtener el objeto del pool
-            GameObject pooledObject = ObjectPoolingManager.Instance.GetPooledObject(poolObjectType);
-
-            pooledObject.transform.position = circleCenter.position;
-            pooledObject.transform.rotation = rotation;
-            pooledObject.SetActive(true);
+            GameObject pooledObject = ActivatePooledObject(rotation);
 
             yield return new WaitForSeconds(repeatTime);
 
-            // Devolver el objeto al pool
-            ObjectPoolingManager.Instance.CoolObject(pooledObject, poolObjectType);
+            DeactivatePooledObject(pooledObject);
         }
+    }
+
+    private Transform GetRandomPathPoint()
+    {
+        int randomIndex = Random.Range(0, playerMovement.PathPoints.Length);
+        return playerMovement.PathPoints[randomIndex];
+    }
+
+    private Quaternion CalculateRotation(Transform targetPoint)
+    {
+        Vector3 direction = (targetPoint.position - circleCenter.position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180f;
+        return Quaternion.Euler(0, 0, angle);
+    }
+
+    private GameObject ActivatePooledObject(Quaternion rotation)
+    {
+        GameObject pooledObject = ObjectPoolingManager.Instance.GetPooledObject(poolObjectType);
+        pooledObject.transform.position = circleCenter.position;
+        pooledObject.transform.rotation = rotation;
+        pooledObject.SetActive(true);
+        return pooledObject;
+    }
+
+    private void DeactivatePooledObject(GameObject pooledObject)
+    {
+        pooledObject.SetActive(false);
+        ObjectPoolingManager.Instance.CoolObject(pooledObject, poolObjectType);
     }
 }
     

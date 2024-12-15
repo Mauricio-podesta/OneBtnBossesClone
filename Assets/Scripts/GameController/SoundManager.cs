@@ -31,12 +31,10 @@ public class SoundManager : MonoBehaviour
     }
     public void PlaySound(AudioClip clip, Vector3 position)
     {
-
         audioSource.transform.position = position;
         
         audioSource.PlayOneShot(clip);
 
-   //     Debug.Log($"Sound: {clip} played at position {position}");
     }
 
 }
