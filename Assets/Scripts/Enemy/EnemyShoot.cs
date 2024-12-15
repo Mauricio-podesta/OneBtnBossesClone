@@ -32,20 +32,20 @@ public class EnemyShoot : MonoBehaviour
             float angleRad = randomAngle * Mathf.Deg2Rad;
             ShowTrajectory(angleRad);
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
 
             Shoot(angleRad);
 
             HideTrajectory();
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
         }
 
     }
 
     void Shoot(float angleRad)
     {
-        // Obtener una bala del Object Pooling Manager
+       
         GameObject newBullet = ObjectPoolingManager.Instance.GetPooledObject(bulletType);
 
         if (newBullet != null) 
@@ -69,7 +69,7 @@ public class EnemyShoot : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
-        // Retornar la bala al pool
+        
         ObjectPoolingManager.Instance.CoolObject(bullet, bulletType);
     }
 

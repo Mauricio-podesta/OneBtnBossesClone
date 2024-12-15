@@ -9066,6 +9066,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 650191038}
     - target: {fileID: -1932009724525990281, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
+      propertyPath: bulletType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1932009724525990281, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
       propertyPath: bulletForce
       value: 5
       objectReference: {fileID: 0}
@@ -10438,7 +10442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1dd75da623f914faa792033e9b6e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 10
+  Hp: 3
 --- !u!4 &1772226659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2829481619867934774, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
@@ -12864,6 +12868,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4289599656299375844, guid: ee922220ea64648459187132b180777b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6417204524830151681, guid: ee922220ea64648459187132b180777b, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -12910,12 +12918,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7868135967054338566, guid: ee922220ea64648459187132b180777b, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7868135967054338566, guid: ee922220ea64648459187132b180777b, type: 3}
+      propertyPath: poolObjectType
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8183960355619784481, guid: ee922220ea64648459187132b180777b, type: 3}
       propertyPath: healthSliderEnemy
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1334027429}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
