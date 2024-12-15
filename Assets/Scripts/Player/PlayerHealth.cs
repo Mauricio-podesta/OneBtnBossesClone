@@ -27,22 +27,9 @@ public class PlayerHealth : MonoBehaviour
         Hp -= 1;
         if (Hp <= 0)
         {
-            OnDeath();
-            //Destroy(gameObject);
+            OnPlayerDeath.Invoke(); 
         }
         Debug.Log("Health: " + Hp);
-
-
-    }
-
-
-    private void OnDeath()
-    {
-        if (OnPlayerDeath != null)
-        {
-            OnPlayerDeath.Invoke();
-        }
-        
 
     }
 

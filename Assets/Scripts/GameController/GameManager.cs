@@ -6,109 +6,108 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("UI Elements")]
-    public TextMeshProUGUI timerText;
-    public GameObject victoryCanvas;
-    public GameObject loseCanvas;
+    // Referencias relacionadas con el tiempo
+    [Header("Time Management")]
+    [SerializeField] private TextMeshProUGUI timeText; // Referencia al componente de texto en la UI para el tiempo de juego
 
-    private float gameTime = 0f;
-    private float bestTime = 0f;
-    private bool isPlayerAlive = true;
-    private bool isEnemyAlive = true;
+    // Referencias relacionadas con los canvas
+    [Header("Victory and Defeat Canvases")]
+    [SerializeField] private GameObject victoryCanvas; // Canvas de victoria
+    [SerializeField] private GameObject defeatCanvas; // Canvas de derrota
+
+    // Referencias relacionadas con la información de victoria
+    [Header("Victory Canvas Elements")]
+    [SerializeField] private TextMeshProUGUI victoryTimeText; // Texto para mostrar el tiempo en el canvas de victoria
+    [SerializeField] private TextMeshProUGUI bestTimeText; // Texto para mostrar el mejor tiempo en el canvas de victoria
+    [SerializeField] private TextMeshProUGUI messageText; // Texto para mostrar el mensaje de felicitaciones
+
+    private float gameTime; // Tiempo de juego en segundos
+    private float bestTime; // Mejor tiempo registrado
 
     void Start()
     {
-        InitializeTimer();
-        SubscribeToEvents();
-        DeactivateCanvases();
+        InitializeGameTime();
+
+        victoryCanvas.SetActive(false); 
+        defeatCanvas.SetActive(false);
+
+        LoadBestTime();
     }
 
     void Update()
     {
-        if (isPlayerAlive && isEnemyAlive)
-        {
-            UpdateGameTime();
-        }
-        else if (!isEnemyAlive)
-        {
-            SaveBestTime();
-        }
+        UpdateGameTime();
+        DisplayGameTime();
     }
 
-    private void InitializeTimer()
+    private void InitializeGameTime()
     {
-        // Load the best time from PlayerPrefs
-        bestTime = PlayerPrefs.GetFloat("BestGameTime", 0f);
-    }
-
-    private void SubscribeToEvents()
-    {
-        // Subscribe to player and enemy death events
-        PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
-        if (playerHealth != null)
-        {
-            playerHealth.OnPlayerDeath += HandlePlayerDeath;
-        }
-
-        Vida enemyHealth = FindObjectOfType<Vida>();
-        if (enemyHealth != null)
-        {
-            enemyHealth.OnEnemyDeath += HandleEnemyDeath;
-        }
+        gameTime = 0f; // Inicializa el tiempo de juego
     }
 
     private void UpdateGameTime()
     {
-        gameTime += Time.deltaTime;
-        UpdateTimerUI();
+        gameTime += Time.deltaTime; // Incrementa el tiempo de juego
     }
 
-    private void UpdateTimerUI()
+    private void DisplayGameTime()
     {
-        int minutes = Mathf.FloorToInt(gameTime / 60F);
-        int seconds = Mathf.FloorToInt(gameTime % 60);
-        int centiseconds = Mathf.FloorToInt((gameTime * 100) % 100);
-        timerText.text = string.Format("{0:0}:{1:00}:{2:00}", minutes, seconds, centiseconds);
+        int minutes = Mathf.FloorToInt(gameTime / 60F); // Calcula los minutos
+        int seconds = Mathf.FloorToInt(gameTime % 60F); // Calcula los segundos
+        int milliseconds = Mathf.FloorToInt((gameTime * 1000) % 1000); // Calcula los milisegundos
+
+        // Actualiza el texto en pantalla
+        timeText.text = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
+    }
+
+    private void LoadBestTime()
+    {
+        bestTime = PlayerPrefs.GetFloat("BestTime", float.MaxValue);
     }
 
     private void SaveBestTime()
     {
-        if (bestTime == 0 || gameTime < bestTime)
+        PlayerPrefs.SetFloat("BestTime", bestTime);
+    }
+
+    public void HandleEnemyDeath()
+    {
+        Time.timeScale = 0f;
+        victoryCanvas.SetActive(true);
+        DisplayVictoryInfo();
+    }
+
+    public void HandlePlayerDeath()
+    {
+        Time.timeScale = 0f;
+        defeatCanvas.SetActive(true);
+    }
+
+    private void DisplayVictoryInfo()
+    {
+        int minutes = Mathf.FloorToInt(gameTime / 60F);
+        int seconds = Mathf.FloorToInt(gameTime % 60F);
+        int milliseconds = Mathf.FloorToInt((gameTime * 1000) % 1000);
+
+        string currentTime = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
+        victoryTimeText.text = "Tiempo: " + currentTime;
+
+        if (gameTime < bestTime)
         {
             bestTime = gameTime;
-            PlayerPrefs.SetFloat("BestGameTime", bestTime);
-            PlayerPrefs.Save();
+            SaveBestTime();
+            messageText.text = "¡Felicidades! ¡Nuevo récord!";
         }
-    }
+        else
+        {
+            messageText.text = "¡Buen trabajo!";
+        }
 
-    private void HandlePlayerDeath()
-    {
-        isPlayerAlive = false;
-        SaveGameData();
-        ActivateCanvas(loseCanvas);
-    }
+        int bestMinutes = Mathf.FloorToInt(bestTime / 60F);
+        int bestSeconds = Mathf.FloorToInt(bestTime % 60F);
+        int bestMilliseconds = Mathf.FloorToInt((bestTime * 1000) % 1000);
 
-    private void HandleEnemyDeath()
-    {
-        isEnemyAlive = false;
-        SaveGameData();
-        ActivateCanvas(victoryCanvas);
-    }
-
-    private void SaveGameData()
-    {
-        PlayerPrefs.SetFloat("GameTime", gameTime);
-        PlayerPrefs.Save();
-    }
-
-    private void ActivateCanvas(GameObject canvas)
-    {
-        canvas.SetActive(true);
-    }
-
-    private void DeactivateCanvases()
-    {
-        if (victoryCanvas != null) victoryCanvas.SetActive(false);
-        if (loseCanvas != null) loseCanvas.SetActive(false);
+        string bestTimeString = string.Format("{0:00}:{1:00}:{2:000}", bestMinutes, bestSeconds, bestMilliseconds);
+        bestTimeText.text = "Mejor Tiempo: " + bestTimeString;
     }
 }

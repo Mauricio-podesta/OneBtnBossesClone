@@ -7,6 +7,8 @@ public class EventController : MonoBehaviour
     public static EventController Instance;
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private Vida EnemyHealth;
+
+    private GameManager gameManager;
     public void GetInstance()
     {
         if (Instance != null && Instance != this)
@@ -23,34 +25,24 @@ public class EventController : MonoBehaviour
     private void Awake()
     {
         GetInstance();
+        gameManager = FindObjectOfType<GameManager>();
     }
-
-
 
     private void OnEnable()
     {
         
-        EnemyHealth.OnEnemyDeath += HandleEnemyDeath;
+        EnemyHealth.OnEnemyDeath += gameManager.HandleEnemyDeath;
         
-        playerHealth.OnPlayerDeath += HandlePlayerDeath;
+        playerHealth.OnPlayerDeath += gameManager.HandlePlayerDeath;
         
     }
 
     private void OnDisable()
     {
-        EnemyHealth.OnEnemyDeath -= HandleEnemyDeath;
+        EnemyHealth.OnEnemyDeath -= gameManager.HandleEnemyDeath;
         
-        playerHealth.OnPlayerDeath -= HandlePlayerDeath;
+        playerHealth.OnPlayerDeath -= gameManager.HandlePlayerDeath;
          
     }
-    private void HandleEnemyDeath()
-    {
-        Debug.Log("Enemy has died!");
-    }
-    private void HandlePlayerDeath()
-    {
-
-        Debug.Log("Player has died!");
-
-    }
+    
 }
