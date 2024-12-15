@@ -38,6 +38,7 @@ public class PlayerShoot : MonoBehaviour
     }
     void Shoot()
     {
+        Debug.Log("Entering Shoot method");
         // Obtener la bala del Object Pooling Manager
         GameObject newBullet = ObjectPoolingManager.Instance.GetPooledObject(bulletType);
 

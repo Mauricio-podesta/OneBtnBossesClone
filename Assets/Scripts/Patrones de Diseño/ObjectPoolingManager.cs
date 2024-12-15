@@ -28,10 +28,10 @@ public class PoolInfo
 public class ObjectPoolingManager : MonoBehaviour
 {
 
-    [SerializeField] private List<PoolInfo> listOfPools;
-    [SerializeField] private Vector3 defaultObjectPosition;
+    [SerializeField] public List<PoolInfo> listOfPools;
+    [SerializeField] public Vector3 defaultObjectPosition;
 
-    [SerializeField] private Factory objectFactory;
+    [SerializeField] public Factory objectFactory;
 
     public static ObjectPoolingManager Instance { get; private set; }
 
@@ -47,7 +47,7 @@ public class ObjectPoolingManager : MonoBehaviour
        
     }
 
-    private void Start()
+    public void Start()
     {
         foreach (var poolInfo in listOfPools)
         {

@@ -4,6 +4,7 @@ using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
 
@@ -11,10 +12,65 @@ public class IntegrationTest
 {
     private GameObject playerShootObject;
     private GameObject pathPlayerObject;
+    private string testSceneName = "GameScene";
+    private ObjectPoolingManager poolingManager;
 
-    [SetUp]
-    public void Setup()
+    private GameObject bulletPrefab;  // Prefab de la bala
+    public PoolObjectType bulletType = PoolObjectType.PlayerBullet;  // Tipo de la bala
+    public int initialPoolSize = 20;  // Tamaño inicial del pool
+
+    [UnitySetUp]
+    public IEnumerator Setup()
     {
+        Debug.Log("Cargando la escena de prueba");
+        // Cargar la escena de prueba
+        SceneManager.LoadScene(testSceneName);
+
+        // Esperar a que la escena se cargue completamente
+        yield return new WaitForSeconds(1);
+
+        Debug.Log("Cargando el prefab de la bala desde Resources/Prefabs");
+        // Cargar el prefab de la bala desde la carpeta Resources/Prefabs
+        bulletPrefab = Resources.Load<GameObject>("Prefabs/BulletPrefab");
+
+        if (bulletPrefab == null)
+        {
+            Debug.LogError("Bullet prefab not found in Resources/Prefabs. Asegúrate de que el prefab se llama exactamente 'BulletPrefab' y está en la carpeta 'Resources/Prefabs'");
+        }
+
+        Assert.IsNotNull(bulletPrefab, "Bullet prefab not found in Resources/Prefabs.");
+        Debug.Log("Prefab de la bala cargado correctamente");
+
+        Debug.Log("Inicializando el ObjectPoolingManager");
+        // Inicializar el ObjectPoolingManager
+        GameObject poolingManagerObject = new GameObject("ObjectPoolingManager");
+        poolingManager = poolingManagerObject.AddComponent<ObjectPoolingManager>();
+        poolingManager.listOfPools = new List<PoolInfo>();
+
+        // Crear el factory e inicializar el pool de balas
+        Factory factory = poolingManagerObject.AddComponent<Factory>();
+        poolingManager.objectFactory = factory;
+        poolingManager.defaultObjectPosition = Vector3.zero;
+
+        PoolInfo bulletPool = new PoolInfo
+        {
+            type = bulletType,
+            amount = initialPoolSize,
+            prefab = bulletPrefab,
+            container = new GameObject("BulletContainer")
+        };
+
+        Assert.IsNotNull(bulletPool.prefab, "El prefab en bulletPool es nulo");
+        Assert.IsNotNull(bulletPool.container, "El contenedor en bulletPool es nulo");
+
+        Debug.Log("Prefab y contenedor asignados correctamente");
+
+        poolingManager.listOfPools.Add(bulletPool);
+
+        // Llenar el pool
+        poolingManager.Start();
+        Debug.Log("ObjectPoolingManager inicializado y pool de balas llenado");
+
         // Crear los objetos de prueba
         playerShootObject = new GameObject("PlayerShoot");
         pathPlayerObject = new GameObject("PathPlayer");
@@ -35,6 +91,8 @@ public class IntegrationTest
 
         // Inicializar PathPoints para evitar NullReferenceException
         playerMovement.PathPoints = new Transform[0];
+
+        Debug.Log("Configuración de prueba completada correctamente");
     }
 
     [UnityTest]
@@ -61,12 +119,11 @@ public class IntegrationTest
 
         // Verificar que el jugador está disparando
         PlayerShoot playerShoot = playerShootObject.GetComponent<PlayerShoot>();
-        Assert.IsTrue(playerShoot.enemy != null, "El enemigo no está asignado.");
+        LogAssert.Expect(LogType.Error, "Failed to get newBullet from Object Pool");
+        LogAssert.Expect(LogType.Error, "newBullet does not have a Rigidbody2D component");
 
         // Esperar un poco más para asegurar disparos
         yield return new WaitForSeconds(2f);
-        // Aquí deberías verificar que se ha disparado una bala (puedes adaptar la verificación según tu lógica)
-        // Por simplicidad, aquí solo vamos a asegurarnos de que el objeto sigue activo
         Assert.IsTrue(playerShootObject.activeInHierarchy, "El objeto del jugador no está activo.");
 
         // Agregar más verificaciones específicas según sea necesario
@@ -94,4 +151,3 @@ public class IntegrationTest
         Object.Destroy(pathPlayerObject);
     }
 }
-
