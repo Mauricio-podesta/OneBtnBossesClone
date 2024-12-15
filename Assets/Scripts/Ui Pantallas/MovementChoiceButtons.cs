@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelsButtons : MonoBehaviour
+public class MovementChoiceButtons : MonoBehaviour
 {
-    public static LevelsButtons Instance;
+    public static MovementChoiceButtons Instance;
     [SerializeField] private GameObject choiceCanvas;
     [SerializeField] private Button powerUpButton;
     [SerializeField] private Button noPowerUpButton;
@@ -32,15 +32,10 @@ public class LevelsButtons : MonoBehaviour
     {
         GetInstance();
 
-        if (powerUpButton != null)
-        {
-            powerUpButton.onClick.AddListener(() => SelectOption(true));
-        }
-        if (noPowerUpButton != null)
-        {
-            noPowerUpButton.onClick.AddListener(() => SelectOption(false));
-        }
-
+        powerUpButton.onClick.AddListener(() => SelectOption(true));
+        
+        noPowerUpButton.onClick.AddListener(() => SelectOption(false));
+        
         sceneChangeButton.gameObject.SetActive(false);
 
         audioSource = gameObject.AddComponent<AudioSource>();

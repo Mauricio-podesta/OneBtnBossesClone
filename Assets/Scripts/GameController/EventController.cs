@@ -19,7 +19,7 @@ public class EventController : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-    //Aca el método se aplica.
+    
     private void Awake()
     {
         GetInstance();
@@ -29,45 +29,19 @@ public class EventController : MonoBehaviour
 
     private void OnEnable()
     {
-        if (EnemyHealth != null)
-        {
-            EnemyHealth.OnEnemyDeath += HandleEnemyDeath;
-        }
-        else
-        {
-            Debug.Log("Null Enemy health");
-        }
-
-        if (playerHealth != null)
-        {
-            playerHealth.OnPlayerDeath += HandlePlayerDeath;
-        }
-        else
-        {
-            Debug.Log("Null player health");
-        }
+        
+        EnemyHealth.OnEnemyDeath += HandleEnemyDeath;
+        
+        playerHealth.OnPlayerDeath += HandlePlayerDeath;
+        
     }
 
     private void OnDisable()
     {
-        if (EnemyHealth != null)
-        {
-            EnemyHealth.OnEnemyDeath -= HandleEnemyDeath;
-        }
-        else
-        {
-            Debug.Log("Null Enemy health");
-        }
-
-
-        if (playerHealth != null)
-        {
-            playerHealth.OnPlayerDeath -= HandlePlayerDeath;
-        }
-        else
-        {
-            Debug.Log("Null player health");
-        }
+        EnemyHealth.OnEnemyDeath -= HandleEnemyDeath;
+        
+        playerHealth.OnPlayerDeath -= HandlePlayerDeath;
+         
     }
     private void HandleEnemyDeath()
     {

@@ -44,11 +44,7 @@ public class Vida : MonoBehaviour
         {
             OnEnemyDeath.Invoke();
         }
-        else
-        {
-            Debug.Log("Null Enemy health");
-        }
-
+        
     }
 
 }
