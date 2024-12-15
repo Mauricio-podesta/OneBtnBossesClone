@@ -6,7 +6,8 @@ using System;
 
 public class Vida : MonoBehaviour
 {
-    private float Hp = 20;
+    public  float Hp = 20;
+
     [SerializeField] private Slider healthSliderEnemy;
     public event Action OnEnemyDeath;
     private void Start()

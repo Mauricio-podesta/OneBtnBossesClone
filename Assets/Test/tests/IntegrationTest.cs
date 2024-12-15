@@ -1,95 +1,101 @@
 using System.Collections;
 using NUnit.Framework;
+using UnityEditor.EditorTools;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-public class IntegrationTest
+public class IntegrationTest : InputTestFixture
 {
-    private GameObject playerShootObject;
-    private GameObject pathPlayerObject;
-    private string testSceneName = "Level 1";
-    private GameObject bulletPrefab;
-    private GameObject spawnPositionObject;
-
-    [UnitySetUp]
-    public IEnumerator Setup()
-    {
-        SceneManager.LoadScene(testSceneName);
-        yield return new WaitForSeconds(1);
-
-        bulletPrefab = Resources.Load<GameObject>("Prefabs/BulletPrefab");
-        Assert.IsNotNull(bulletPrefab, "Bullet prefab not found in Resources/Prefabs.");
-
-        playerShootObject = new GameObject("PlayerShoot");
-        pathPlayerObject = new GameObject("PathPlayer");
-        spawnPositionObject = new GameObject("SpawnPosition");
-
-        PlayerShoot playerShoot = playerShootObject.AddComponent<PlayerShoot>();
-        PlayerMovement playerMovement = playerShootObject.AddComponent<PlayerMovement>();
-
-        Assert.IsNotNull(playerShoot, "PlayerShoot component is not added.");
-        Assert.IsNotNull(playerMovement, "PlayerMovement component is not added.");
-
-        playerShoot.enemy = pathPlayerObject;
-        playerShoot.bulletType = PoolObjectType.PlayerBullet;
-        playerShoot.spawnShootPosition = spawnPositionObject.transform;
-
-        SoundManager soundManager = new GameObject("SoundManager").AddComponent<SoundManager>();
-
-        pathPlayerObject.transform.position = new Vector3(1f, 1f, 0f);
-        playerMovement.PathPlayer = pathPlayerObject.transform;
-        playerMovement.PathPoints = new Transform[0];
-    }
 
     [UnityTest]
-    public IEnumerator PlayerMovementAndShootingTest()
+    public IEnumerator TestEnemyTakeDamageOnPlayerProjectileCollision()
     {
-        yield return null;
+        SceneManager.LoadScene("Scenes/Level 1");
 
-        PlayerMovement playerMovement = playerShootObject.GetComponent<PlayerMovement>();
-        CreateRandomPathPoints(playerMovement);
+        yield return new WaitForSeconds(0.5f);
 
-        Assert.IsTrue(playerMovement.PathPoints.Length > 0, "PathPoints were not created.");
+        GameObject playerProjectile = ObjectPoolingManager.Instance.GetPooledObject(PoolObjectType.PlayerBullet);
+        GameObject Enemy = GameObject.FindWithTag("Enemy");
+        Enemy.SetActive(true);
 
-        yield return new WaitForSeconds(2f);
+        Vida EnemyHealt = GameObject.FindObjectOfType<Vida>();
+        float Hp = EnemyHealt.Hp;
+        playerProjectile.transform.position = EnemyHealt.transform.position;
+        playerProjectile.SetActive(true);
 
-        Vector3 initialPosition = playerShootObject.transform.position;
-        yield return new WaitForSeconds(1f);
-        Vector3 newPosition = playerShootObject.transform.position;
-        Assert.AreNotEqual(initialPosition, newPosition, "El jugador no se está moviendo.");
+        yield return new WaitForSeconds(0.1f);
 
-        PlayerShoot playerShoot = playerShootObject.GetComponent<PlayerShoot>();
-        if (playerShoot != null && playerShoot.enemy != null && playerShoot.spawnShootPosition != null && SoundManager.Instance != null)
-        {
-            playerShoot.Shoot();
-        }
+        Assert.That(Hp > EnemyHealt.Hp);
+    }
+    [UnityTest]
+    public IEnumerator TestTriangleAttackOnPlayerCollision()
+    {
+        SceneManager.LoadScene("Scenes/Level 1");
 
-        yield return new WaitForSeconds(2f);
-        Assert.IsTrue(playerShootObject.activeInHierarchy, "El objeto del jugador no está activo.");
+        yield return new WaitForSeconds(0.5f);
+
+        GameObject EnemyTriangle = ObjectPoolingManager.Instance.GetPooledObject(PoolObjectType.Triangle);
+        GameObject Player = GameObject.FindWithTag("Player");
+        Player.SetActive(true);
+
+        PlayerHealth playerHealth = GameObject.FindObjectOfType<PlayerHealth>();
+        float Hp = playerHealth.Hp;
+        EnemyTriangle.transform.position = playerHealth.transform.position;
+        EnemyTriangle.SetActive(true);
+
+        yield return new WaitForSeconds(7f);
+
+        Assert.That(Hp > playerHealth.Hp);
+    }
+    [UnityTest]
+    public IEnumerator DamagePlayerOnEnemyObstacle()
+    {
+        SceneManager.LoadScene("Scenes/Level 2");
+
+        yield return new WaitForSeconds(0.5f);
+
+        GameObject player = GameObject.FindWithTag("Player");
+        player.SetActive(true);
+
+        GameObject enemySquare = ObjectPoolingManager.Instance.GetPooledObject(PoolObjectType.Square);
+
+
+        PlayerHealth playerHealth = GameObject.FindObjectOfType<PlayerHealth>();
+        float hp = playerHealth.Hp;
+
+        enemySquare.transform.position = playerHealth.transform.position;
+        enemySquare.SetActive(true);
+
+        yield return new WaitForSeconds(4f);
+
+        Assert.That(hp > playerHealth.Hp);
+    }
+    [UnityTest]
+    public IEnumerator PlayerDamageOnEnemyBullet()
+    {
+        SceneManager.LoadScene("Scenes/Level 3");
+
+        yield return new WaitForSeconds(0.5f);
+
+        GameObject player = GameObject.FindWithTag("Player");
+        player.SetActive(true);
+
+        GameObject enemyProjectile = ObjectPoolingManager.Instance.GetPooledObject(PoolObjectType.EnemyBullet);
+
+
+        PlayerHealth playerHealth = GameObject.FindObjectOfType<PlayerHealth>();
+        float hp = playerHealth.Hp;
+
+        enemyProjectile.transform.position = playerHealth.transform.position;
+        enemyProjectile.SetActive(true);
+
+        yield return new WaitForSeconds(0.4f);
+
+        Assert.That(hp > playerHealth.Hp);
     }
 
-    private void CreateRandomPathPoints(PlayerMovement playerMovement)
-    {
-        int cantidad = 10;
-        playerMovement.PathPoints = new Transform[cantidad];
-
-        for (int i = 0; i < cantidad; i++)
-        {
-            Vector3 randomPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0);
-            GameObject point = new GameObject($"Point {i}");
-            point.transform.position = randomPosition;
-            playerMovement.PathPoints[i] = point.transform;
-        }
-    }
-
-    [TearDown]
-    public void Teardown()
-    {
-        Object.Destroy(playerShootObject);
-        Object.Destroy(pathPlayerObject);
-        Object.Destroy(spawnPositionObject);
-    }
 }
 
 
