@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-public class TestButtons
+public class TestButtonsSwitchCanvas
 {
     private GameObject currentCanvas;
     private GameObject targetCanvas;
