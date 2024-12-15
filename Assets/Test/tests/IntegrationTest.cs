@@ -8,7 +8,7 @@ public class IntegrationTest
 {
     private GameObject playerShootObject;
     private GameObject pathPlayerObject;
-    private string testSceneName = "GameScene";
+    private string testSceneName = "Level 1";
     private GameObject bulletPrefab;
     private GameObject spawnPositionObject;
 

@@ -13,15 +13,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "PowerUp",
-                    "type": "Button",
-                    "id": "d1507af8-432b-4e7c-ba27-4c961c871283",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Hold",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -68,28 +59,6 @@
                     "action": "Cambiodireccion",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a7db3455-dc98-40c5-9a4d-e3d279a92677",
-                    "path": "<Mouse>/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PowerUp",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "29a05aba-040e-430e-b336-aca22eef6181",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PowerUp",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -111,11 +80,70 @@
                 {
                     "name": "",
                     "id": "a3a0174b-0572-422a-806e-b915041beeba",
-                    "path": "<Keyboard>/escape",
+                    "path": "<Keyboard>/p",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PowerUp",
+            "id": "526e49b5-5998-4de0-8a66-5fbcd312ca3a",
+            "actions": [
+                {
+                    "name": "PowerUp",
+                    "type": "Button",
+                    "id": "833204e5-463e-421e-971f-aa4709accb74",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PowerUpRelease",
+                    "type": "Button",
+                    "id": "98235ec7-6e7e-4ce9-9e47-44e55769d777",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d8c03a82-a495-436b-bd0b-6edbc59a41a3",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PowerUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5a6ab833-9b6b-4764-b6a1-7ea319830844",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PowerUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ecb5f62f-4293-41f2-bc2f-7fda345fe9d5",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PowerUpRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

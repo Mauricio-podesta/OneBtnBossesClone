@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 using UnityEngine.InputSystem;
 
 public class PowerUp : MonoBehaviour
@@ -18,85 +16,81 @@ public class PowerUp : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] private Slider Powerupslide;
 
-    //datos privados
+    // Datos privados
     public static bool canactivate = false;
     private bool isCooldown = false;
-    float normalvelocity;
+    private float normalvelocity;
     private Collider2D playerCollider;
 
     void Start()
     {
         UpdateHealthUI();
-
         normalvelocity = playerMovement.movementSpeed;
-
         playerCollider = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
-       
+
         if (playerCollider == null)
         {
             Debug.LogWarning("No se encontró el Collider2D en el objeto con el tag 'Player'");
         }
-        
-     
     }
-    private IEnumerator Cooldown() 
-    {
-        isCooldown = true; 
-        yield return new WaitForSeconds(5f); 
-        isCooldown = false; 
-    }
+
     void Update()
     {
         if (canactivate && !isCooldown && charge > 0)
         {
-            Discharge();    
+            Discharge();
         }
         else
         {
             charger();
-
         }
     }
 
     void Discharge()
     {
-        charge -= (100/TimeDischarge) * Time.deltaTime;
+        charge -= (100 / TimeDischarge) * Time.deltaTime;
         charge = Mathf.Clamp(charge, 0f, 100f);
         UpdateHealthUI();
 
-        if (charge <= 0) 
+        if (charge <= 0)
         {
             canactivate = false;
+            StartCoroutine(Cooldown());
         }
 
         playerCollider.enabled = false;
         playerMovement.movementSpeed = Mathf.Clamp(playerMovement.movementSpeed + velocidadIncremento, 0f, MaxVelocity);
     }
+
     void charger()
     {
-
-        charge += (100/Timecharge) * Time.deltaTime;
-        //maximo de la carga
+        charge += (100 / Timecharge) * Time.deltaTime;
         charge = Mathf.Clamp(charge, 0f, 100f);
         UpdateHealthUI();
-        
+
         playerMovement.movementSpeed = normalvelocity;
         playerCollider.enabled = true;
     }
+
     void UpdateHealthUI()
     {
         Powerupslide.value = charge;
-
     }
-    public void OnPowerUp(InputAction.CallbackContext context)
+
+    public void OnPowerUp()
     {
-        if (charge >= 0 && !isCooldown)
+        if (!isCooldown)
         {
             canactivate = true;
         }
-        else if (context.canceled) 
-        { canactivate = false; 
-           StartCoroutine(Cooldown()); 
-        }
     }
+
+    public void OnPowerUpRelease()
+    {
+        canactivate = false;
+        StartCoroutine(Cooldown());
+
+    }
+    private IEnumerator Cooldown() { isCooldown = true; yield return new WaitForSeconds(5f); isCooldown = false; }
 }
+
