@@ -1719,6 +1719,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1932009724525990281, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
+      propertyPath: bulletForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1932009724525990281, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
       propertyPath: spawnShootPosition
       value: 
       objectReference: {fileID: 1485591264}

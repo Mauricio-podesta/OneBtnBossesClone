@@ -5,28 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class Buttons : MonoBehaviour
 {
+    private string sceneToLoad;
 
-    [SerializeField] private string sceneToLoad;
-
-    public void SceneMenu()
+    public void ChangeScene(string sceneToLoad)
     {
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene(sceneToLoad);
     }
-    public void LevelOne()
-    {
-        SceneManager.LoadScene("Level 1");
-    }
-    
-
-    public void Play()
-    {
-        SceneManager.LoadScene("Login");
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
 }
 

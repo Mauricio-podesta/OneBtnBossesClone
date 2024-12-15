@@ -659,15 +659,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 384016116}
-        m_TargetAssemblyTypeName: Buttons, ButtonScript
-        m_MethodName: LevelOne
-        m_Mode: 1
+        m_TargetAssemblyTypeName: Buttons, Scripts
+        m_MethodName: ChangeScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Level 1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &656841260
@@ -1509,7 +1509,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 966532830}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 384016116}
+        m_TargetAssemblyTypeName: Buttons, Scripts
+        m_MethodName: ChangeScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Level 3
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &966532830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1646,7 +1658,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 973980211}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 384016116}
+        m_TargetAssemblyTypeName: Buttons, Scripts
+        m_MethodName: ChangeScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Level 2
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &973980211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1912,7 +1936,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1226813176
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2225,7 +2249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1420001775
 MonoBehaviour:
   m_ObjectHideFlags: 0
