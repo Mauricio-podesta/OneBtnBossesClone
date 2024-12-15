@@ -2,32 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttackBox : MonoBehaviour
+public class EnemyAttackBox : EnemyAttackBase
 {
-    [SerializeField] private PoolObjectType boxType;
-    private PlayerMovement playerMovement;
-
-    public float repeatTime;
-    public float startDelay;
     public float delayBetweenCycles = 1f;
-
-    public float fadeDuration = 1f;
-
-
     private List<GameObject> activeObjects = new List<GameObject>();
-    void Start()
-    {
-        playerMovement = FindObjectOfType<PlayerMovement>();
 
-        Invoke(nameof(StartCoroutineWithDelay), startDelay);
-    }
-
-    void StartCoroutineWithDelay()
-    {
-        StartCoroutine(RepeatInstantiateAndDestroy());
-    }
-
-    IEnumerator RepeatInstantiateAndDestroy()
+    public override IEnumerator RepeatAttack()
     {
         while (true)
         {
@@ -42,9 +22,9 @@ public class EnemyAttackBox : MonoBehaviour
         }
     }
 
-    List<Transform> SelectRandomPathPoints()
+    private List<Transform> SelectRandomPathPoints()
     {
-        int count = Random.Range(3, 6); 
+        int count = Random.Range(3, 6);
         List<Transform> selectedPathPoints = new List<Transform>();
 
         for (int i = 0; i < count; i++)
@@ -61,12 +41,11 @@ public class EnemyAttackBox : MonoBehaviour
         return selectedPathPoints;
     }
 
-    void ActivateObjects(List<Transform> pathPoints)
+    private void ActivateObjects(List<Transform> pathPoints)
     {
         foreach (Transform pathPoint in pathPoints)
         {
-            // Obtener el objeto del pool
-            GameObject pooledObject = ObjectPoolingManager.Instance.GetPooledObject(boxType);
+            GameObject pooledObject = ObjectPoolingManager.Instance.GetPooledObject(poolObjectType);
 
             if (pooledObject != null)
             {
@@ -74,19 +53,19 @@ public class EnemyAttackBox : MonoBehaviour
                 pooledObject.transform.rotation = Quaternion.identity;
                 pooledObject.SetActive(true);
 
-                activeObjects.Add(pooledObject); // Registrar el objeto activado
+                activeObjects.Add(pooledObject);
             }
         }
     }
 
-    void DeactivateObjects()
+    private void DeactivateObjects()
     {
         foreach (GameObject obj in activeObjects)
         {
             obj.SetActive(false);
-            ObjectPoolingManager.Instance.CoolObject(obj, boxType); // Retornar al pool
+            ObjectPoolingManager.Instance.CoolObject(obj, poolObjectType);
         }
-        activeObjects.Clear(); 
+        activeObjects.Clear();
     }
-    
+
 }
