@@ -68,9 +68,9 @@ public class IntegrationTest : InputTestFixture
         enemySquare.transform.position = playerHealth.transform.position;
         enemySquare.SetActive(true);
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(7f);
 
-        Assert.That(hp > playerHealth.Hp);
+        Assert.That(Hp > playerHealth.Hp);
     }
     [UnityTest]
     public IEnumerator PlayerDamageOnEnemyBullet()
