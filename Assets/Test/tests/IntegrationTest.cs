@@ -49,31 +49,34 @@ public class IntegrationTest : InputTestFixture
 
         Assert.That(Hp > playerHealth.Hp);
     }
-    //[UnityTest]
-    //public IEnumerator DamagePlayerOnEnemyObstacle()
-    //{
-    //    SceneManager.LoadScene("Scenes/Level 2");
 
-    //    yield return new WaitForSeconds(0.5f);
-
-    //    GameObject player = GameObject.FindWithTag("Player");
-    //    player.SetActive(true);
-
-    //    GameObject enemySquare = ObjectPoolingManager.Instance.GetPooledObject(PoolObjectType.Square);
-
-
-    //    PlayerHealth playerHealth = GameObject.FindObjectOfType<PlayerHealth>();
-    //    float hp = playerHealth.Hp;
-
-    //    enemySquare.transform.position = playerHealth.transform.position;
-    //    enemySquare.SetActive(true);
-
-    //    yield return new WaitForSeconds(7f);
-
-    //    Assert.That(hp > playerHealth.Hp);
-    //}
 
     [UnityTest]
+    public IEnumerator DamagePlayerOnEnemyObstacle()
+    {
+        SceneManager.LoadScene("Scenes/Level 2");
+
+    yield return new WaitForSeconds(0.5f);
+
+    GameObject player = GameObject.FindWithTag("Player");
+    player.SetActive(true);
+
+        GameObject enemySquare = ObjectPoolingManager.Instance.GetPooledObject(PoolObjectType.Square);
+
+
+    PlayerHealth playerHealth = GameObject.FindObjectOfType<PlayerHealth>();
+    float hp = playerHealth.Hp;
+
+    enemySquare.transform.position = playerHealth.transform.position;
+        enemySquare.SetActive(true);
+
+
+        yield return new WaitForSeconds(7f);
+
+    Assert.That(hp > playerHealth.Hp);
+    }
+
+[UnityTest]
     public IEnumerator PlayerDamageOnEnemyBullet()
     {
         SceneManager.LoadScene("Scenes/Level 3");
@@ -96,6 +99,8 @@ public class IntegrationTest : InputTestFixture
 
         Assert.That(hp > playerHealth.Hp);
     }
+
+
 
 }
 
