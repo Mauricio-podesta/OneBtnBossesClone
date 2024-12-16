@@ -10,7 +10,6 @@ public class SoundManager : MonoBehaviour
 
     private AudioSource audioSource;
 
-    // Aca se crea el método donde guardo la info en la variable   
     public void GetInstance()
     {
         if (Instance != null && Instance != this)
@@ -20,10 +19,8 @@ public class SoundManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
-    //Aca el método se aplica.
     private void Awake()
     {
         GetInstance();
@@ -34,7 +31,5 @@ public class SoundManager : MonoBehaviour
         audioSource.transform.position = position;
         
         audioSource.PlayOneShot(clip);
-
     }
-
 }

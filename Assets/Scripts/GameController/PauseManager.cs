@@ -22,7 +22,6 @@ public class PauseManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
     public void TogglePauseState()
@@ -42,7 +41,6 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 0f;
         PausePanel.SetActive(true);
     }
-
     private void ResumeGame()
     {
         Time.timeScale = 1f;

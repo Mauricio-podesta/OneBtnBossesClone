@@ -21,14 +21,10 @@ public class BlinkingObject : MonoBehaviour
 
     void OnEnable()
     {
-        // Reiniciar el estado del objeto cuando se activa desde el pool
         objectCollider.enabled = false; 
         isBlinking = true; 
         StartCoroutine(Blink());
     }
-
-
-
     IEnumerator Blink()
     {
         float elapsed = 0f;
@@ -47,14 +43,11 @@ public class BlinkingObject : MonoBehaviour
 
         objectCollider.enabled = true;
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            playerHealth.TakeDamage();
+            playerHealth.TakeDamage(1);
         }
     }
-
-
 }

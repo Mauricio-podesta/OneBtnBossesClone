@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEditor.EditorTools;
 using UnityEditor;
 
-
 public enum PoolObjectType
 {
     EnemyBullet,
@@ -35,18 +34,13 @@ public class ObjectPoolingManager : MonoBehaviour
 
     public static ObjectPoolingManager Instance { get; private set; }
 
-    
-
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
-
-       
     }
-
     public void Start()
     {
         foreach (var poolInfo in listOfPools)
@@ -54,19 +48,17 @@ public class ObjectPoolingManager : MonoBehaviour
             FillPool(poolInfo);
         }
     }
-
     private void FillPool(PoolInfo poolInfo)
     {
         for (int i = 0; i < poolInfo.amount; i++)
         {
-            GameObject objInstance = objectFactory.CreateObject(poolInfo.type, poolInfo.container.transform); //factory
+            GameObject objInstance = objectFactory.CreateObject(poolInfo.type, poolInfo.container.transform); 
             objInstance.SetActive(false);
 
             objInstance.transform.position = defaultObjectPosition;
             poolInfo.pool.Add(objInstance);
         }
     }
-
     public GameObject GetPooledObject(PoolObjectType type)
     {
         PoolInfo selected = GetPoolByType(type);
@@ -81,12 +73,11 @@ public class ObjectPoolingManager : MonoBehaviour
         }
         else
         {
-            objInstance = objectFactory.CreateObject(type, selected.container.transform); //factory
+            objInstance = objectFactory.CreateObject(type, selected.container.transform); 
         }
 
         return objInstance;
     }
-
     public void CoolObject(GameObject obj, PoolObjectType type)
     {
         obj.SetActive(false);
@@ -95,15 +86,12 @@ public class ObjectPoolingManager : MonoBehaviour
         PoolInfo selected = GetPoolByType(type);
 
         if (!selected.pool.Contains(obj))
-            selected.pool.Add(obj);
-        
+            selected.pool.Add(obj);  
     }
-
     private PoolInfo GetPoolByType(PoolObjectType type)
     {
         return listOfPools.Find(pool => pool.type == type);
     }
-
     private void OnDestroy()
     {
         if (Instance == this)

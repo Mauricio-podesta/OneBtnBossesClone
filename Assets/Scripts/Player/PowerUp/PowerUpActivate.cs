@@ -9,7 +9,6 @@ public class PowerUpActivate : MonoBehaviour
 
     void Start()
     {
-        // Verificar la decisión del jugador desde el Singleton
         if (MovementChoiceButtons.Instance != null)
         {
             if (MovementChoiceButtons.Instance.usePowerUp)
@@ -23,10 +22,9 @@ public class PowerUpActivate : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No se encontró la instancia de LevelsButtons.");
+            Debug.LogWarning("The LevelsButtons instance was not found.");
         }
     }
-
     private void ActivatePowerUp()
     {
         if (powerUpObject != null)
@@ -36,7 +34,7 @@ public class PowerUpActivate : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No se asignó un objeto para el Power-Up.");
+            Debug.LogWarning("An object was not assigned for the Power-Up.");
         }
     }
 
@@ -52,12 +50,12 @@ public class PowerUpActivate : MonoBehaviour
             }
             else
             {
-                Debug.Log("El jugador ya tiene el script ChangeDirection.");
+                Debug.Log("The player already has the ChangeDirection script.");
             }
         }
         else
         {
-            Debug.LogWarning("No se asignó el objeto jugador.");
+            Debug.LogWarning("The player object was not assigned.");
         }
     }
 }

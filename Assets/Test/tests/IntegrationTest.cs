@@ -20,14 +20,14 @@ public class IntegrationTest : InputTestFixture
         GameObject Enemy = GameObject.FindWithTag("Enemy");
         Enemy.SetActive(true);
 
-        Vida EnemyHealt = GameObject.FindObjectOfType<Vida>();
-        float Hp = EnemyHealt.Hp;
+        EnemyLife EnemyHealt = GameObject.FindObjectOfType<EnemyLife>();
+        float Hp = EnemyHealt.enemyLife;
         playerProjectile.transform.position = EnemyHealt.transform.position;
         playerProjectile.SetActive(true);
 
         yield return new WaitForSeconds(0.1f);
 
-        Assert.That(Hp > EnemyHealt.Hp);
+        Assert.That(Hp > EnemyHealt.enemyLife);
     }
 
     [UnityTest]
@@ -42,40 +42,38 @@ public class IntegrationTest : InputTestFixture
         Player.SetActive(true);
 
         PlayerHealth playerHealth = GameObject.FindObjectOfType<PlayerHealth>();
-        float Hp = playerHealth.Hp;
+        float Hp = playerHealth.PlayerLife;
         EnemyTriangle.transform.position = playerHealth.transform.position;
         EnemyTriangle.SetActive(true);
 
         yield return new WaitForSeconds(7f);
 
-        Assert.That(Hp > playerHealth.Hp);
+        Assert.That(Hp > playerHealth.PlayerLife);
     }
     //revisar
     [UnityTest]
-    public IEnumerator DamagePlayerOnEnemyObstacle()
+    public IEnumerator TestDefeatOnPlayerDeath()
     {
         SceneManager.LoadScene("Scenes/Level 2");
 
         yield return new WaitForSeconds(0.5f);
 
-        GameObject enemySquare = ObjectPoolingManager.Instance.GetPooledObject(PoolObjectType.Square);
-
         GameObject player = GameObject.FindWithTag("Player");
-
-        PlayerMovement movementSpeed = GameObject.FindObjectOfType<PlayerMovement>();
-        movementSpeed.movementSpeed = 0;
-
         player.SetActive(true);
 
-        
+        GameObject enemy = GameObject.FindWithTag("Enemy");
+        enemy.SetActive(true);
+
         PlayerHealth playerHealth = GameObject.FindObjectOfType<PlayerHealth>();
-        float hp = playerHealth.Hp;
+      
 
-        enemySquare.transform.position = playerHealth.transform.position;
+        if (playerHealth != null)
+            playerHealth.TakeDamage(3);
 
-        yield return new WaitForSeconds(4f);
+        Assert.AreEqual(0, playerHealth.PlayerLife);
+        Assert.AreEqual(0, Time.timeScale);
 
-        Assert.That(hp > playerHealth.Hp);
+        yield return new WaitForSecondsRealtime(0.5f);
     }
 
     [UnityTest]
@@ -92,18 +90,18 @@ public class IntegrationTest : InputTestFixture
 
 
         PlayerHealth playerHealth = GameObject.FindObjectOfType<PlayerHealth>();
-        float hp = playerHealth.Hp;
+        float hp = playerHealth.PlayerLife;
 
         enemyProjectile.transform.position = playerHealth.transform.position;
         enemyProjectile.SetActive(true);
 
         yield return new WaitForSeconds(0.4f);
 
-        Assert.That(hp > playerHealth.Hp);
+        Assert.That(hp > playerHealth.PlayerLife);
     }
 
     [UnityTest]
-    public IEnumerator TestVcitoryOnEnemyDeath()
+    public IEnumerator TestVictoryOnEnemyDeath()
    {
        SceneManager.LoadScene("Scenes/Level 1");
 
@@ -115,12 +113,12 @@ public class IntegrationTest : InputTestFixture
        GameObject enemy = GameObject.FindWithTag("Enemy");
        enemy.SetActive(true);
 
-       Vida enemyLife = GameObject.FindObjectOfType<Vida>();
+       EnemyLife enemyLife = GameObject.FindObjectOfType<EnemyLife>();
 
        if (enemyLife != null)
            enemyLife.TakeDamage(20);
 
-       Assert.AreEqual(0, enemyLife.Hp);
+       Assert.AreEqual(0, enemyLife.enemyLife);
        Assert.AreEqual(0, Time.timeScale);
 
        yield return new WaitForSecondsRealtime(0.5f);

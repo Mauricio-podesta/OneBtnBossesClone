@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class SwitchCanvas : MonoBehaviour
 {
-   
     public GameObject currentCanvas;
     public GameObject targetCanvas;
-
-    // Método para cambiar de Canvas
     public void CanvasSwitcher()
     {
         if (currentCanvas != null) currentCanvas.SetActive(false); 

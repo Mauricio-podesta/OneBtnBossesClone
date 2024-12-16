@@ -10504,7 +10504,6 @@ GameObject:
   - component: {fileID: 1676825145}
   - component: {fileID: 1676825144}
   - component: {fileID: 1676825143}
-  - component: {fileID: 1676825142}
   m_Layer: 5
   m_Name: Canvas victoria
   m_TagString: Untagged
@@ -10537,18 +10536,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1676825142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1676825140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac122d2ebb2a4f74eb8c6b65726f4ac3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1676825143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11023,7 +11010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1dd75da623f914faa792033e9b6e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 3
+  PlayerLife: 3
 --- !u!1 &1789642873
 GameObject:
   m_ObjectHideFlags: 0
@@ -12149,7 +12136,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1956324792}
   - component: {fileID: 1956324794}
-  - component: {fileID: 1956324793}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -12172,18 +12158,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 758047475}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1956324793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956324791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d5ccfe46a2190e45a33cf53b9b2ec1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1956324794
 MonoBehaviour:
   m_ObjectHideFlags: 0

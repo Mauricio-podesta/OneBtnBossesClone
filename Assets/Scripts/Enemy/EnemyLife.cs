@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class Vida : MonoBehaviour
+public class EnemyLife : MonoBehaviour
 {
-    public float Hp = 20;
-
+    public float enemyLife = 20;
+  
     [SerializeField] private Slider healthSliderEnemy;
     public event Action OnEnemyDeath;
     private void Start()
@@ -24,19 +24,18 @@ public class Vida : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        Hp -= damage;
-        if (Hp <= 0)
+        enemyLife -= damage;
+        if (enemyLife <= 0)
         {
             OnDeath();
             Destroy(gameObject);         
         }
         UpdateHealthUI();
     }
-
     void UpdateHealthUI()
     {
-        Hp = Mathf.Clamp(Hp, 0, 100);
-        healthSliderEnemy.value = Hp;
+        enemyLife = Mathf.Clamp(enemyLife, 0, 100);
+        healthSliderEnemy.value = enemyLife;
 
     }
     private void OnDeath()
@@ -44,8 +43,6 @@ public class Vida : MonoBehaviour
         if (OnEnemyDeath != null)
         {
             OnEnemyDeath.Invoke();
-        }
-        
+        }   
     }
-
 }

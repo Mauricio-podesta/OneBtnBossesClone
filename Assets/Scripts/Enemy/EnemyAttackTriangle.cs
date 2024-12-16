@@ -27,14 +27,12 @@ public class EnemyAttackTriangle : EnemyAttackBase
         int randomIndex = Random.Range(0, playerMovement.PathPoints.Length);
         return playerMovement.PathPoints[randomIndex];
     }
-
     private Quaternion CalculateRotation(Transform targetPoint)
     {
         Vector3 direction = (targetPoint.position - circleCenter.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180f;
         return Quaternion.Euler(0, 0, angle);
     }
-
     private GameObject ActivatePooledObject(Quaternion rotation)
     {
         GameObject pooledObject = ObjectPoolingManager.Instance.GetPooledObject(poolObjectType);
@@ -43,7 +41,6 @@ public class EnemyAttackTriangle : EnemyAttackBase
         pooledObject.SetActive(true);
         return pooledObject;
     }
-
     private void DeactivatePooledObject(GameObject pooledObject)
     {
         pooledObject.SetActive(false);

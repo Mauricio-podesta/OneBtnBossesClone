@@ -27,22 +27,15 @@ public class PlayerShoot : MonoBehaviour
        
         while (true) 
         {
-           
             Shoot();
-
            
             yield return new WaitForSeconds(0.5f);
         }
     }
-    void Update()
-    {   
-    }
     public void Shoot()
     {
-        // Obtener la bala del Object Pooling Manager
         GameObject newBullet = ObjectPoolingManager.Instance.GetPooledObject(bulletType);
 
-       
         if (newBullet != null)
         {
             newBullet.transform.position = spawnShootPosition.position;
@@ -60,17 +53,13 @@ public class PlayerShoot : MonoBehaviour
                 newBulletRb.velocity = Vector2.zero;
                 newBulletRb.AddForce(shootDirection * bulletForce, ForceMode2D.Impulse);
             }
-
-           
             StartCoroutine(ReturnBulletToPool(newBullet, bulletType, 2f));
         }
     }
-
     IEnumerator ReturnBulletToPool(GameObject bullet, PoolObjectType type, float delay)
     {
         yield return new WaitForSeconds(delay);
 
-        // Devuelve el objeto al Object Pool
         ObjectPoolingManager.Instance.CoolObject(bullet, type);
     }
 }

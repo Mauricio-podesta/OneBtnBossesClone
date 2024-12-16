@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float Hp = 3;
+    public float PlayerLife = 3;
     public event Action OnPlayerDeath;
     public event Action<int> OnPlayerHurt;
 
@@ -12,19 +12,17 @@ public class PlayerHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("Cubo"))
         {
-            TakeDamage();
+            TakeDamage(1);
         }
     }
-
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        Hp -= 1;
-        OnPlayerHurt?.Invoke((int)Hp);
-        if (Hp <= 0)
+        PlayerLife -= damage;
+        OnPlayerHurt?.Invoke((int)PlayerLife);
+        if (PlayerLife <= 0)
         {
             OnPlayerDeath?.Invoke();
         }
-        Debug.Log("Health: " + Hp);
+        Debug.Log("Health: " + PlayerLife);
     }
-
 }

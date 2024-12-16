@@ -6,7 +6,6 @@ public class EnemyAttackBox : EnemyAttackBase
 {
     public float delayBetweenCycles = 1f;
     private List<GameObject> activeObjects = new List<GameObject>();
-
     public override IEnumerator RepeatAttack()
     {
         while (true)
@@ -21,7 +20,6 @@ public class EnemyAttackBox : EnemyAttackBase
             yield return new WaitForSeconds(delayBetweenCycles);
         }
     }
-
     private List<Transform> SelectRandomPathPoints()
     {
         int count = Random.Range(3, 6);
@@ -40,7 +38,6 @@ public class EnemyAttackBox : EnemyAttackBase
 
         return selectedPathPoints;
     }
-
     private void ActivateObjects(List<Transform> pathPoints)
     {
         foreach (Transform pathPoint in pathPoints)
@@ -57,7 +54,6 @@ public class EnemyAttackBox : EnemyAttackBase
             }
         }
     }
-
     private void DeactivateObjects()
     {
         foreach (GameObject obj in activeObjects)
@@ -67,5 +63,4 @@ public class EnemyAttackBox : EnemyAttackBase
         }
         activeObjects.Clear();
     }
-
 }

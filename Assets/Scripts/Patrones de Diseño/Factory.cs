@@ -27,7 +27,7 @@ public class Factory : MonoBehaviour
             return Instantiate(prefab, parent);
         }
 
-        Debug.LogWarning($"No se encontró un prefab para el tipo {type}");
+        Debug.LogWarning($"No prefab found for type {type}");
         return null;
     }
 }

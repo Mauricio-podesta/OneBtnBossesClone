@@ -7,12 +7,10 @@ public class PlayerHealthUI : MonoBehaviour
     [SerializeField] private Transform heartsContainer;
     public GameObject[] hearts;
     private int heartsCount;
-
     private void Start()
     {
         InitializeHearts();
     }
-
     private void InitializeHearts()
     {
         heartsCount = heartsContainer.childCount;
@@ -23,7 +21,6 @@ public class PlayerHealthUI : MonoBehaviour
             hearts[i] = heartsContainer.GetChild(i).gameObject;
         }
     }
-
     public void DecreaseHealth(int playerCurrentHealth)
     {
         if (playerCurrentHealth >= 0 && playerCurrentHealth < hearts.Length)

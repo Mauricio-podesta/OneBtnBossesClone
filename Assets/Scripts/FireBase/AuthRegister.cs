@@ -18,8 +18,6 @@ public class AuthRegister : MonoBehaviour
     [SerializeField] private TMP_InputField passwordRegisterField;
     [SerializeField] private TMP_InputField passwordRegisterVerifyField;
     [SerializeField] private TMP_Text warningRegisterText;
-
-
     private void Awake()
     {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
@@ -31,7 +29,7 @@ public class AuthRegister : MonoBehaviour
             }
             else
             {
-                Debug.Log("no se pudo resolver las dependencia del firebase" + dependencyStatus);
+                Debug.Log("could not resolve firebase dependency" + dependencyStatus);
             }
         });
     }

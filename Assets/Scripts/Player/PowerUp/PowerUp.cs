@@ -16,7 +16,6 @@ public class PowerUp : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] private Slider Powerupslide;
 
-    // Datos privados
     public static bool canactivate = false;
     private bool isCooldown = false;
     private float normalvelocity;
@@ -33,7 +32,6 @@ public class PowerUp : MonoBehaviour
             Debug.LogWarning("No se encontró el Collider2D en el objeto con el tag 'Player'");
         }
     }
-
     void Update()
     {
         if (canactivate && !isCooldown && charge > 0)
@@ -45,7 +43,6 @@ public class PowerUp : MonoBehaviour
             charger();
         }
     }
-
     void Discharge()
     {
         charge -= (100 / TimeDischarge) * Time.deltaTime;
@@ -61,7 +58,6 @@ public class PowerUp : MonoBehaviour
         playerCollider.enabled = false;
         playerMovement.movementSpeed = Mathf.Clamp(playerMovement.movementSpeed + velocidadIncremento, 0f, MaxVelocity);
     }
-
     void charger()
     {
         charge += (100 / Timecharge) * Time.deltaTime;
@@ -71,12 +67,10 @@ public class PowerUp : MonoBehaviour
         playerMovement.movementSpeed = normalvelocity;
         playerCollider.enabled = true;
     }
-
     void UpdateHealthUI()
     {
         Powerupslide.value = charge;
     }
-
     public void OnPowerUp()
     {
         if (!isCooldown)
@@ -84,13 +78,19 @@ public class PowerUp : MonoBehaviour
             canactivate = true;
         }
     }
-
     public void OnPowerUpRelease()
     {
         canactivate = false;
         StartCoroutine(Cooldown());
 
     }
-    private IEnumerator Cooldown() { isCooldown = true; yield return new WaitForSeconds(5f); isCooldown = false; }
+    private IEnumerator Cooldown() 
+    {
+        isCooldown = true; 
+        
+        yield return new WaitForSeconds(5f); 
+    
+        isCooldown = false; 
+    }
 }
 

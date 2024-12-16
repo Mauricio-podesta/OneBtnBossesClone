@@ -16,8 +16,6 @@ public class AuthLogIn : MonoBehaviour
     [SerializeField] private TMP_InputField emailLoginField;
     [SerializeField] private TMP_InputField passwordLoginField;
     [SerializeField] private TMP_Text warningLoginText;
-
-
     private void Awake()
     {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
@@ -33,15 +31,12 @@ public class AuthLogIn : MonoBehaviour
             }
         });
     }
-
-
     public void LoginButton()
     {
         StartCoroutine(Login(emailLoginField.text, passwordLoginField.text));
 
         SceneManager.LoadScene("LevelSelection");
     }
-
     private IEnumerator Login(string _email, string _password)
     {
 

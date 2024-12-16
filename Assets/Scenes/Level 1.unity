@@ -3401,7 +3401,6 @@ GameObject:
   m_Component:
   - component: {fileID: 561703300}
   - component: {fileID: 561703301}
-  - component: {fileID: 561703302}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3442,18 +3441,6 @@ MonoBehaviour:
   victoryTimeText: {fileID: 2010883977}
   bestTimeText: {fileID: 1215729059}
   messageText: {fileID: 61001797}
---- !u!114 &561703302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561703299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d5ccfe46a2190e45a33cf53b9b2ec1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &564396593
 GameObject:
   m_ObjectHideFlags: 0
@@ -8998,6 +8985,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2879835808298485956, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 6668686948969893583, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -10555,7 +10546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1dd75da623f914faa792033e9b6e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 3
+  PlayerLife: 3
 --- !u!4 &1772226659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2829481619867934774, guid: 7a1aa9eb3b3417b419fc312361b301db, type: 3}

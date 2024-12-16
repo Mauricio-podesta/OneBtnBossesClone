@@ -22,7 +22,6 @@ public class EnemyShoot : MonoBehaviour
 
         StartCoroutine(Ishoot());
     }
-
     IEnumerator Ishoot()
     {
         yield return new WaitForSeconds(2f);
@@ -40,9 +39,7 @@ public class EnemyShoot : MonoBehaviour
 
             yield return new WaitForSeconds(0.3f);
         }
-
     }
-
     void Shoot(float angleRad)
     {
        
@@ -59,20 +56,16 @@ public class EnemyShoot : MonoBehaviour
             Vector2 shootDirection = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
             newBulletRb.velocity = Vector2.zero; 
             newBulletRb.AddForce(shootDirection * BulletForce, ForceMode2D.Impulse);
-
-            
+  
             StartCoroutine(DisableBulletAfterTime(newBullet, 2f));
         }
     }
-
     IEnumerator DisableBulletAfterTime(GameObject bullet, float time)
     {
         yield return new WaitForSeconds(time);
-
         
         ObjectPoolingManager.Instance.CoolObject(bullet, bulletType);
     }
-
     void ShowTrajectory(float angleRad)
     {
         Vector3[] trajectoryPoints = new Vector3[numberOfPoints];
@@ -91,8 +84,7 @@ public class EnemyShoot : MonoBehaviour
        
         lineRenderer.positionCount = trajectoryPoints.Length;
         lineRenderer.SetPositions(trajectoryPoints);
-    }
-   
+    } 
     void HideTrajectory()
     {
         lineRenderer.positionCount = 0;

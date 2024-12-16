@@ -20,41 +20,35 @@ public class PlayerMovement : MonoBehaviour
 
     private LineRenderer lineRenderer;
 
-    // Usado solo el nivel 1 para que se genere el circulo
-    string nombreEscena = "Level 1";
-
+    string scenename = "Level 1";
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
 
-        if (SceneManager.GetActiveScene().name == nombreEscena)
-        { DistribuirObjetosCircularmente(); }
+        if (SceneManager.GetActiveScene().name == scenename)
+        { DistributeObjectsCircularly(); }
         if (PathPoints.Length > 0)
         {
             transform.position = PathPoints[PathPointsIndex].position;
         }
-        DibujarLinea();
+        DrawLine();
     }
     void Update()
     {
         Movement();
-        
     }
-
-    
-
-    void DistribuirObjetosCircularmente()
+    void DistributeObjectsCircularly()
     {
-        int cantidad = Mathf.FloorToInt(2 * Mathf.PI * radio / distancebetweenpoint);
-        PathPoints = new Transform[cantidad];
+        int cant = Mathf.FloorToInt(2 * Mathf.PI * radio / distancebetweenpoint);
+        PathPoints = new Transform[cant];
 
-        for (int i = 0; i < cantidad; i++)
+        for (int i = 0; i < cant; i++)
         {
-            float angulo = i * Mathf.PI * 2 / cantidad;
+            float angle = i * Mathf.PI * 2 / cant;
 
 
-            float x = Mathf.Cos(angulo) * radio;
-            float y = Mathf.Sin(angulo) * radio;
+            float x = Mathf.Cos(angle) * radio;
+            float y = Mathf.Sin(angle) * radio;
 
 
             Vector3 posicion = new Vector3(x, y, 0) + transform.position;
@@ -71,8 +65,7 @@ public class PlayerMovement : MonoBehaviour
             PathPoints[i] = punto.transform;
         }
     }
-
-    void DibujarLinea()
+    void DrawLine()
     {
         if (lineRenderer == null || PathPoints.Length == 0) return;
 
@@ -82,16 +75,11 @@ public class PlayerMovement : MonoBehaviour
             lineRenderer.SetPosition(i, PathPoints[i].position);
         }
     }
-
-
-
     void Movement()
     {
         if (PathPoints.Length == 0) return;
 
-
         transform.position = Vector3.MoveTowards(transform.position, PathPoints[PathPointsIndex].position, movementSpeed * Time.deltaTime);
-
 
         if (Vector3.Distance(transform.position, PathPoints[PathPointsIndex].position) < 0.1f)
         {
@@ -113,6 +101,5 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
 }
 
