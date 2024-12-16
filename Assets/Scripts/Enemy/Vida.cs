@@ -6,7 +6,7 @@ using System;
 
 public class Vida : MonoBehaviour
 {
-    public  float Hp = 20;
+    public float Hp = 20;
 
     [SerializeField] private Slider healthSliderEnemy;
     public event Action OnEnemyDeath;
@@ -18,13 +18,13 @@ public class Vida : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            TakeDamage();
+            TakeDamage(1);
            
         }
     }
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        Hp -= 1;
+        Hp -= damage;
         if (Hp <= 0)
         {
             OnDeath();

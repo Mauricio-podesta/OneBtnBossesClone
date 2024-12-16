@@ -29,6 +29,7 @@ public class IntegrationTest : InputTestFixture
 
         Assert.That(Hp > EnemyHealt.Hp);
     }
+
     [UnityTest]
     public IEnumerator TestTriangleAttackOnPlayerCollision()
     {
@@ -49,34 +50,35 @@ public class IntegrationTest : InputTestFixture
 
         Assert.That(Hp > playerHealth.Hp);
     }
-
-
+    //revisar
     [UnityTest]
     public IEnumerator DamagePlayerOnEnemyObstacle()
     {
         SceneManager.LoadScene("Scenes/Level 2");
 
-    yield return new WaitForSeconds(0.5f);
-
-    GameObject player = GameObject.FindWithTag("Player");
-    player.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
 
         GameObject enemySquare = ObjectPoolingManager.Instance.GetPooledObject(PoolObjectType.Square);
 
+        GameObject player = GameObject.FindWithTag("Player");
 
-    PlayerHealth playerHealth = GameObject.FindObjectOfType<PlayerHealth>();
-    float hp = playerHealth.Hp;
+        PlayerMovement movementSpeed = GameObject.FindObjectOfType<PlayerMovement>();
+        movementSpeed.movementSpeed = 0;
 
-    enemySquare.transform.position = playerHealth.transform.position;
-        enemySquare.SetActive(true);
+        player.SetActive(true);
 
+        
+        PlayerHealth playerHealth = GameObject.FindObjectOfType<PlayerHealth>();
+        float hp = playerHealth.Hp;
 
-        yield return new WaitForSeconds(7f);
+        enemySquare.transform.position = playerHealth.transform.position;
 
-    Assert.That(hp > playerHealth.Hp);
+        yield return new WaitForSeconds(4f);
+
+        Assert.That(hp > playerHealth.Hp);
     }
 
-[UnityTest]
+    [UnityTest]
     public IEnumerator PlayerDamageOnEnemyBullet()
     {
         SceneManager.LoadScene("Scenes/Level 3");
@@ -100,6 +102,29 @@ public class IntegrationTest : InputTestFixture
         Assert.That(hp > playerHealth.Hp);
     }
 
+    [UnityTest]
+    public IEnumerator TestVcitoryOnEnemyDeath()
+   {
+       SceneManager.LoadScene("Scenes/Level 1");
+
+       yield return new WaitForSeconds(0.5f);
+
+       GameObject player = GameObject.FindWithTag("Player");
+       player.SetActive(true);
+
+       GameObject enemy = GameObject.FindWithTag("Enemy");
+       enemy.SetActive(true);
+
+       Vida enemyLife = GameObject.FindObjectOfType<Vida>();
+
+       if (enemyLife != null)
+           enemyLife.TakeDamage(20);
+
+       Assert.AreEqual(0, enemyLife.Hp);
+       Assert.AreEqual(0, Time.timeScale);
+
+       yield return new WaitForSecondsRealtime(0.5f);
+   }
 
 
 }
