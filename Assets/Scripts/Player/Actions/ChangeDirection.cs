@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class ChangeDirection : MonoBehaviour
 {
     public static bool movingForward = true;
-    public void OnCambiodireccion()
+    public void OnChangedirection()
     {
         if (!PowerUp.canactivate)
         {

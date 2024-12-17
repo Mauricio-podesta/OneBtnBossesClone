@@ -7,7 +7,7 @@ public class PowerUp : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField] float charge = 0;
-    [SerializeField] private float velocidadIncremento = 2f;
+    [SerializeField] private float speedincrease = 2f;
     [SerializeField] private float MaxVelocity = 15f;
     [SerializeField] private float Timecharge;
     [SerializeField] private float TimeDischarge;
@@ -29,7 +29,7 @@ public class PowerUp : MonoBehaviour
 
         if (playerCollider == null)
         {
-            Debug.LogWarning("No se encontró el Collider2D en el objeto con el tag 'Player'");
+            Debug.LogWarning("Collider2D not found on object with label 'Player'");
         }
     }
     void Update()
@@ -38,7 +38,7 @@ public class PowerUp : MonoBehaviour
         {
             Discharge();
         }
-        else
+        else if(!canactivate && !isCooldown)
         {
             charger();
         }
@@ -56,7 +56,7 @@ public class PowerUp : MonoBehaviour
         }
 
         playerCollider.enabled = false;
-        playerMovement.movementSpeed = Mathf.Clamp(playerMovement.movementSpeed + velocidadIncremento, 0f, MaxVelocity);
+        playerMovement.movementSpeed = Mathf.Clamp(playerMovement.movementSpeed + speedincrease, 0f, MaxVelocity);
     }
     void charger()
     {
@@ -71,24 +71,24 @@ public class PowerUp : MonoBehaviour
     {
         Powerupslide.value = charge;
     }
-    public void OnPowerUp()
+    public void OnPowerUp(InputAction.CallbackContext context)
     {
-        if (!isCooldown)
+        Debug.Log("OnPowerUp called: " + context.phase);
+
+        if (context.performed && !isCooldown && charge > 0)
         {
             canactivate = true;
         }
-    }
-    public void OnPowerUpRelease()
-    {
-        canactivate = false;
-        StartCoroutine(Cooldown());
-
+        else if (context.canceled)
+        {
+            canactivate = false;
+        }
     }
     private IEnumerator Cooldown() 
     {
         isCooldown = true; 
         
-        yield return new WaitForSeconds(5f); 
+        yield return new WaitForSeconds(1f); 
     
         isCooldown = false; 
     }

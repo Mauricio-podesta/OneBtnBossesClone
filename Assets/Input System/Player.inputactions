@@ -6,7 +6,7 @@
             "id": "a48026eb-2a5e-49c8-8c2a-4ad919562d1b",
             "actions": [
                 {
-                    "name": "Cambiodireccion",
+                    "name": "Changedirection",
                     "type": "Button",
                     "id": "5c03d332-5f0d-445e-9c44-f85efecaf751",
                     "expectedControlType": "Button",
@@ -23,7 +23,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Cambiodireccion",
+                    "action": "Changedirection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -34,7 +34,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Cambiodireccion",
+                    "action": "Changedirection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -45,7 +45,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Cambiodireccion",
+                    "action": "Changedirection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -56,7 +56,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Cambiodireccion",
+                    "action": "Changedirection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -100,15 +100,6 @@
                     "id": "833204e5-463e-421e-971f-aa4709accb74",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "PowerUpRelease",
-                    "type": "Button",
-                    "id": "98235ec7-6e7e-4ce9-9e47-44e55769d777",
-                    "expectedControlType": "Button",
-                    "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 }
@@ -133,17 +124,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "PowerUp",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ecb5f62f-4293-41f2-bc2f-7fda345fe9d5",
-                    "path": "<Mouse>/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PowerUpRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
